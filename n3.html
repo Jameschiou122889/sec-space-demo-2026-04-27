@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Space · N3 Picture Book</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;700&family=Caveat:wght@500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #fdf6e3;
+    --cream-2: #f7eedc;
+    --peach: #ffd4a3;
+    --mint: #b8e0c2;
+    --lavender: #d8c8f0;
+    --sky: #b3d9f5;
+    --rose: #f5b8c4;
+    --ink: #3d3a52;
+    --ink-sub: #6a6680;
+    --gold: #e6a83a;
+    --line: rgba(61,58,82,0.12);
+    --font-h: "Fredoka", "Noto Sans TC", sans-serif;
+    --font-d: "Caveat", "Noto Sans TC", cursive;
+    --font-b: "Noto Sans TC", "Fredoka", sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-b); color: var(--ink); background: var(--cream); line-height: 1.7; }
+
+  .nav { position: sticky; top: 0; z-index: 100; background: var(--cream); color: var(--ink); padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-h); font-size: 13px; font-weight: 500; border-bottom: 1px solid var(--line); }
+  .nav a { color: var(--gold); text-decoration: none; font-weight: 700; }
+
+  /* HERO — soft pastel + hand-drawn */
+  .hero { padding: 56px 32px 64px; max-width: 1100px; margin: 0 auto; position: relative; overflow: hidden;
+    background:
+      radial-gradient(ellipse at 80% 20%, var(--peach) 0%, transparent 35%),
+      radial-gradient(ellipse at 20% 80%, var(--lavender) 0%, transparent 35%),
+      radial-gradient(ellipse at 80% 80%, var(--mint) 0%, transparent 35%);
+    border-radius: 32px;
+    margin-top: 24px;
+  }
+  /* Crayon stars */
+  .hero::after { content: "✦  ✧    ✦   ✧  ✦"; position: absolute; top: 32px; right: 48px; font-family: var(--font-d); font-size: 24px; color: var(--gold); opacity: 0.55; letter-spacing: 0.2em; }
+
+  .hero-tag { font-family: var(--font-d); font-size: 22px; color: var(--gold); margin-bottom: 18px; transform: rotate(-2deg); display: inline-block; }
+  .hero h1 { font-family: var(--font-h); font-size: 4.6rem; line-height: 1.05; color: var(--ink); font-weight: 700; max-width: 18ch; }
+  .hero h1 em { font-style: normal; color: var(--gold); }
+  @media (max-width: 768px) { .hero h1 { font-size: 3rem; } }
+  .hero .lead { color: var(--ink-sub); font-size: 1.1rem; margin-top: 18px; max-width: 50ch; }
+  .hero .lead em { font-style: normal; color: var(--ink); font-weight: 700; background: var(--peach); padding: 0 6px; border-radius: 4px; }
+  .hero .stats { display: flex; gap: 36px; margin-top: 28px; padding: 18px 0; border-top: 2px dotted var(--line); border-bottom: 2px dotted var(--line); flex-wrap: wrap; }
+  .hero .stat { display: flex; flex-direction: column; gap: 2px; }
+  .hero .stat .num { font-family: var(--font-h); font-size: 2rem; color: var(--gold); font-weight: 700; }
+  .hero .stat .label { font-family: var(--font-b); font-size: 11px; color: var(--ink-sub); font-weight: 500; }
+  .hero .cta { display: inline-block; margin-top: 28px; background: var(--gold); color: var(--cream); padding: 14px 32px; font-family: var(--font-h); font-size: 14px; font-weight: 700; text-decoration: none; border-radius: 999px; box-shadow: 0 4px 0 #c08a2a; transition: all 0.18s; }
+  .hero .cta:hover { transform: translateY(-2px); box-shadow: 0 6px 0 #c08a2a; }
+
+  /* MARQUEE */
+  .marquee { background: var(--cream-2); padding: 16px 0; overflow: hidden; border-top: 2px dashed var(--line); border-bottom: 2px dashed var(--line); }
+  .marquee-track { display: flex; gap: 48px; animation: mq 70s linear infinite; width: max-content; }
+  .marquee span { font-family: var(--font-h); font-size: 14px; color: var(--ink-sub); font-weight: 500; white-space: nowrap; padding-left: 48px; border-left: 2px dotted var(--ink-sub); }
+  @keyframes mq { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* FEATURED */
+  .featured { padding: 64px 32px; max-width: 1100px; margin: 0 auto; }
+  .featured h2 { font-family: var(--font-h); font-size: 2.6rem; text-align: center; margin-bottom: 8px; font-weight: 700; }
+  .featured h2 em { font-style: normal; color: var(--gold); }
+  .featured .sub { text-align: center; color: var(--ink-sub); margin-bottom: 36px; font-family: var(--font-d); font-size: 18px; }
+  .cards-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 24px; }
+  @media (max-width: 1024px) { .cards-row { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 600px) { .cards-row { grid-template-columns: repeat(2, 1fr); } }
+  .card { background: var(--cream); padding: 18px 14px; transition: all 0.2s; border-radius: 18px; box-shadow: 0 4px 0 var(--line); }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 8px 0 var(--line); }
+  .card:nth-child(1) { background: linear-gradient(180deg, var(--peach) 0%, var(--cream) 60%); }
+  .card:nth-child(2) { background: linear-gradient(180deg, var(--rose) 0%, var(--cream) 60%); }
+  .card:nth-child(3) { background: linear-gradient(180deg, var(--sky) 0%, var(--cream) 60%); }
+  .card:nth-child(4) { background: linear-gradient(180deg, var(--mint) 0%, var(--cream) 60%); }
+  .card:nth-child(5) { background: linear-gradient(180deg, var(--lavender) 0%, var(--cream) 60%); }
+  .card-tag { font-family: var(--font-h); font-size: 11px; color: var(--ink-sub); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+  .card-title { font-family: var(--font-h); font-size: 1.3rem; color: var(--ink); margin-bottom: 6px; font-weight: 700; }
+  .card-desc { font-size: 0.88rem; color: var(--ink-sub); line-height: 1.55; }
+  .card-icon { width: 100%; aspect-ratio: 1; background: rgba(255,255,255,0.6); margin-bottom: 12px; display: flex; align-items: center; justify-content: center; font-size: 2.4rem; border-radius: 14px; }
+
+  /* DAYS */
+  .days { padding: 64px 32px; max-width: 1100px; margin: 0 auto; }
+  .days h2 { font-family: var(--font-h); font-size: 2.6rem; text-align: center; margin-bottom: 36px; font-weight: 700; }
+  .days h2 em { font-style: normal; color: var(--gold); }
+  .day-cover { padding: 36px 28px 32px; margin-bottom: 16px; position: relative; background: var(--cream); border-radius: 22px; box-shadow: 0 4px 0 var(--line); }
+  .day-cover.d1 { background: linear-gradient(135deg, var(--peach) 0%, var(--cream) 70%); }
+  .day-cover.d2 { background: linear-gradient(135deg, var(--rose) 0%, var(--cream) 70%); }
+  .day-cover.d3 { background: linear-gradient(135deg, var(--sky) 0%, var(--cream) 70%); }
+  .day-cover.d4 { background: linear-gradient(135deg, var(--mint) 0%, var(--cream) 70%); }
+  .day-cover.d5 { background: linear-gradient(135deg, var(--lavender) 0%, var(--cream) 70%); }
+  .day-cover::before { content: attr(data-tag); position: absolute; top: 16px; left: 28px; font-family: var(--font-d); font-size: 18px; color: var(--gold); transform: rotate(-2deg); }
+  .day-cover h3 { font-family: var(--font-h); font-size: 1.8rem; margin-top: 22px; font-weight: 700; }
+  .day-cover h3 em { font-style: normal; color: var(--gold); }
+  .day-cover p { color: var(--ink-sub); margin-top: 8px; max-width: 600px; }
+
+  /* CTA */
+  .cta-section { padding: 80px 32px; text-align: center;
+    background:
+      radial-gradient(ellipse at 30% 50%, var(--lavender) 0%, transparent 40%),
+      radial-gradient(ellipse at 70% 50%, var(--peach) 0%, transparent 40%),
+      var(--cream-2);
+    border-radius: 32px 32px 0 0; margin-top: 40px;
+  }
+  .cta-section .kicker { font-family: var(--font-d); font-size: 22px; color: var(--gold); margin-bottom: 18px; }
+  .cta-section h2 { font-family: var(--font-h); font-size: 2.8rem; line-height: 1.2; font-weight: 700; max-width: 22ch; margin: 0 auto; }
+  .cta-section h2 em { font-style: normal; color: var(--gold); }
+  .cta-section .btn { display: inline-block; margin-top: 32px; background: var(--gold); color: var(--cream); padding: 18px 44px; font-family: var(--font-h); font-size: 15px; font-weight: 700; text-decoration: none; border-radius: 999px; box-shadow: 0 4px 0 #c08a2a; }
+  .cta-section .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 0 #c08a2a; }
+  .cta-section .schedule { font-family: var(--font-b); font-size: 12px; color: var(--ink-sub); margin-top: 22px; }
+</style>
+</head>
+<body>
+<nav class="nav">
+  <span>SEC // 太空獵人 · N3 · PICTURE BOOK</span>
+  <a href="../">← BACK</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-tag">2026 夏令營 ✦ 6-12 歲</div>
+  <h1>5 顆<em>禁區星球</em>，5 天<em>找回家</em></h1>
+  <p class="lead">人類還沒去過的地方，<em>我們先去</em>！我們有 5 天 20 堂課和 10 件親手做的太空獵人作品，讓孩子真的把太陽系裝進口袋帶回家。</p>
+  <div class="stats">
+    <div class="stat"><div class="num">5</div><div class="label">禁區星球</div></div>
+    <div class="stat"><div class="num">10</div><div class="label">件獵人作品</div></div>
+    <div class="stat"><div class="num">1:7</div><div class="label">照顧比</div></div>
+  </div>
+  <a class="cta" href="#">→ 立即報名</a>
+</section>
+
+<div class="marquee">
+  <div class="marquee-track">
+    <span>火箭推進</span><span>引力逃逸</span><span>木星磁場</span><span>歐羅巴冰海</span><span>泰坦甲烷湖</span><span>嗜極生命</span><span>大氣再入</span><span>軌道力學</span>
+    <span>火箭推進</span><span>引力逃逸</span><span>木星磁場</span><span>歐羅巴冰海</span><span>泰坦甲烷湖</span><span>嗜極生命</span><span>大氣再入</span><span>軌道力學</span>
+  </div>
+</div>
+
+<section class="featured">
+  <h2>5 種<em>能力解鎖</em> + 10 件帶回家</h2>
+  <p class="sub">每天解鎖一種能力 ✨</p>
+  <div class="cards-row">
+    <div class="card"><div class="card-icon">🚀</div><div class="card-tag">Day 1 · 能力 01</div><div class="card-title">推進與引力</div><div class="card-desc">火箭怎麼飛？引力場逃逸大解密。</div></div>
+    <div class="card"><div class="card-icon">🌋</div><div class="card-tag">Day 2 · 能力 02</div><div class="card-title">磁場與輻射</div><div class="card-desc">木星磁場讓伊歐火山一直噴。</div></div>
+    <div class="card"><div class="card-icon">❄️</div><div class="card-tag">Day 3 · 能力 03</div><div class="card-title">極寒與生命</div><div class="card-desc">冰下海洋藏著嗜極生命。</div></div>
+    <div class="card"><div class="card-icon">⛽</div><div class="card-tag">Day 4 · 能力 04</div><div class="card-title">燃料與化學</div><div class="card-desc">甲烷海洋是另一種「水」。</div></div>
+    <div class="card"><div class="card-icon">🛰️</div><div class="card-tag">Day 5 · 能力 05</div><div class="card-title">導航與返航</div><div class="card-desc">把發現帶回地球。</div></div>
+  </div>
+</section>
+
+<section class="days">
+  <h2>5 顆<em>禁區星球</em></h2>
+  <div class="day-cover d1" data-tag="Day 01 · 出發"><h3>獵人基地：<em>逃離地球</em></h3><p>火箭推進 + 夯土發射台 + 引力實驗 + 火箭大賽。</p></div>
+  <div class="day-cover d2" data-tag="Day 02 · 伊歐"><h3>地獄之月：<em>火山與磁場</em></h3><p>太陽系最活躍火山世界。木星磁場塑形物質、熔岩湖、SO₂ 大氣。</p></div>
+  <div class="day-cover d3" data-tag="Day 03 · 歐羅巴"><h3>冰封海洋：<em>尋找生命</em></h3><p>冰殼下藏著比地球海洋多 2 倍水量的暗海。</p></div>
+  <div class="day-cover d4" data-tag="Day 04 · 泰坦"><h3>甲烷世界：<em>另一種化學</em></h3><p>地球之外唯一有液體湖泊的星球。</p></div>
+  <div class="day-cover d5" data-tag="Day 05 · 返航"><h3>返航地球：<em>帶著發現回家</em></h3><p>UFO 解構、外星生命設想、太空引擎、最終獵人日誌發表會。</p></div>
+</section>
+
+<section class="cta-section">
+  <div class="kicker">★ Book Your Seat ★</div>
+  <h2>五天，<em>五顆禁區星球</em>。<br>讓孩子先去人類還沒去過的地方。</h2>
+  <a class="btn" href="#">→ 立即報名</a>
+  <div class="schedule">2026 夏令營梯次：6 月底起 · 7 月 · 8 月每月開班</div>
+</section>
+</body>
+</html>

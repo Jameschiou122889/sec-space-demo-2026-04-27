@@ -19,24 +19,28 @@
   .wrap { max-width: 920px; margin: 0 auto; }
   h1 { font-family: "Space Mono", monospace; font-size: 1.4rem; color: #00d4ff; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 8px; }
   .meta { font-family: "Space Mono", monospace; font-size: 11px; color: #ff6b35; letter-spacing: 0.22em; margin-bottom: 32px; text-transform: uppercase; }
-  .intro { color: #9aa8c0; margin-bottom: 36px; max-width: 60ch; font-size: 0.95rem; }
-  .section-title { font-family: "Space Mono", monospace; font-size: 12px; color: #ff2d75; letter-spacing: 0.22em; text-transform: uppercase; margin: 32px 0 12px; padding-top: 16px; border-top: 1px solid rgba(232,237,245,0.1); }
-  .opts { display: grid; gap: 14px; margin-bottom: 28px; }
+  .intro { color: #9aa8c0; margin-bottom: 28px; max-width: 60ch; font-size: 0.95rem; }
+  .section-title { font-family: "Space Mono", monospace; font-size: 12px; color: #ff2d75; letter-spacing: 0.22em; text-transform: uppercase; margin: 28px 0 12px; padding-top: 16px; border-top: 1px solid rgba(232,237,245,0.1); }
+  .opts { display: grid; gap: 12px; margin-bottom: 24px; }
   .opt {
-    display: block; padding: 22px 24px; background: #16263d; border: 1px solid rgba(0,212,255,0.25); color: #e8edf5; text-decoration: none; transition: all 0.18s;
+    display: block; padding: 20px 22px; background: #16263d; border: 1px solid rgba(0,212,255,0.25); color: #e8edf5; text-decoration: none; transition: all 0.18s;
   }
   .opt:hover { border-color: #00d4ff; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,212,255,0.15); }
-  .opt-title { font-family: "Space Mono", monospace; font-size: 14px; color: #00d4ff; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 6px; }
-  .opt-name { font-size: 1.2rem; font-weight: 700; color: #e8edf5; margin-bottom: 4px; }
+  .opt-title { font-family: "Space Mono", monospace; font-size: 13px; color: #00d4ff; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 6px; }
+  .opt-name { font-size: 1.15rem; font-weight: 700; color: #e8edf5; margin-bottom: 4px; }
   .opt-desc { font-size: 0.9rem; color: #9aa8c0; }
 
   .opt-bj { border-color: rgba(255,45,117,0.4); }
   .opt-bj .opt-title { color: #ff2d75; }
   .opt-bj:hover { border-color: #ff2d75; box-shadow: 0 8px 24px rgba(255,45,117,0.18); }
 
-  .opt-iter { border-color: rgba(179,71,255,0.5); background: linear-gradient(135deg, #16263d 0%, #1a1840 100%); }
+  .opt-iter { border-color: rgba(179,71,255,0.5); }
   .opt-iter .opt-title { color: #b347ff; }
   .opt-iter:hover { border-color: #b347ff; box-shadow: 0 8px 24px rgba(179,71,255,0.2); }
+
+  .opt-new { border-color: rgba(255,206,111,0.55); background: linear-gradient(135deg, #16263d 0%, #1c1a14 100%); }
+  .opt-new .opt-title { color: #ffce6f; }
+  .opt-new:hover { border-color: #ffce6f; box-shadow: 0 8px 24px rgba(255,206,111,0.22); }
 
   .footer { color: #9aa8c0; font-size: 0.88rem; padding-top: 24px; border-top: 1px solid rgba(232,237,245,0.1); margin-top: 24px; }
   .footer code { background: #16263d; padding: 2px 6px; font-family: "Space Mono", monospace; font-size: 0.85rem; color: #00d4ff; }
@@ -45,44 +49,57 @@
 <body>
 <div class="wrap">
   <h1>SEC // SPACE HUNTER 視覺方向 demo</h1>
-  <div class="meta">2026-04-27 · ITERATION 2 · BJ + 4 EXTENSIONS</div>
-  <p class="intro">第一輪：B（detective）／J（cyberpunk neon）／BJ hybrid。<br>第二輪（你看完 BJ 喜歡後延伸）：在 BJ 基礎上做 4 個方向探索 — Mission Control（HUD/scanline）／Cinema（寬銀幕星雲）／Deep Violet（紫主導）／Brutal（硬邊工程感）。每個 demo 都是 hero + marquee + 5 ABILITY cards + 5 day covers + CTA。</p>
+  <div class="meta">2026-04-27 · ITERATION 3 · 12 VARIANTS · BJ EXTENSIONS + 5 NEW DIRECTIONS</div>
+  <p class="intro">第三輪：跳出 BJ 路線，給 5 個全新方向（NASA Archive / Voyager / Picture Book / Webb Telescope / Tokyo Konbini Sci-Fi）。每個 demo 都是 hero + marquee + 5 ABILITY cards + 5 day covers + CTA，完整可比較。</p>
 
-  <div class="section-title">★ ITERATION 2 — BJ 延伸方向</div>
+  <div class="section-title">★ ITERATION 3 — 全新發散方向（不限 BJ）</div>
   <div class="opts">
-    <a class="opt opt-iter" href="./bj-1.html">
-      <div class="opt-title">BJ-1 // Mission Control</div>
-      <div class="opt-name">任務控制台 · CRT 顯示器框 + scanline</div>
-      <div class="opt-desc">把 hero 包進帶 LED 的 CRT 螢幕框，加上 sticky scanline overlay。卡片有 magenta 邊角，狀態列裝著 "MISSION ID" / "STATUS" 三段資訊。HUD 感最強，最像 NASA / SpaceX 任務直播。</div>
+    <a class="opt opt-new" href="./n1.html">
+      <div class="opt-title">N1 // NASA Archive</div>
+      <div class="opt-name">NASA 技術備忘錄 · 米色紙底</div>
+      <div class="opt-desc">完全反向：白底 / 黑字 / 紅藍 NASA 技術文件配色。EB Garamond 襯線標題 + IBM Plex Mono metadata。Hero 像 1970s NASA Technical Memorandum，雙欄 Mission Statement + Specifications。權威感最強，也最反 cyberpunk。</div>
     </a>
-    <a class="opt opt-iter" href="./bj-2.html">
-      <div class="opt-title">BJ-2 // Cinema</div>
-      <div class="opt-name">寬銀幕星雲 · 居中 hero + 漸層 + 星空</div>
-      <div class="opt-desc">最大轉向：去掉 grid + case file，hero 全寬居中、上下星空+漸層星雲。Cormorant Infant 義大利字 h1（取代 Bebas Neue），最像 BBC Planet Earth × Mass Effect 海報。情緒最濃。</div>
+    <a class="opt opt-new" href="./n2.html">
+      <div class="opt-title">N2 // Voyager / Carl Sagan</div>
+      <div class="opt-name">航海家金唱片 · 黑底 + 暖金</div>
+      <div class="opt-desc">深咖啡黑 #0c0a08 + 金箔 #d4a843 + amber + cream。Cormorant Garamond 義大利字。Hero 角落漂浮一顆「Voyager 金唱片」紋路圓形。中間嵌一句 "We are made of starstuff."。詩意、文學感、適合家長 demographic。</div>
     </a>
-    <a class="opt opt-iter" href="./bj-3.html">
-      <div class="opt-title">BJ-3 // Deep Violet</div>
-      <div class="opt-name">紫主導 · violet 推上、magenta 退下</div>
-      <div class="opt-desc">換 BJ 的 magenta 為 violet（#b347ff）作主調，加金色 #f5c842 當第二主色（CTA / 底色光斑）。Orbitron 重體大寫。氣氛從「霓虹挑釁」變「深空檔案室」，更沉穩、更有威嚴。</div>
+    <a class="opt opt-new" href="./n3.html">
+      <div class="opt-title">N3 // Picture Book Cosmos</div>
+      <div class="opt-name">繪本宇宙 · 蜜桃／薄荷／薰衣草柔色</div>
+      <div class="opt-desc">最 family-friendly：奶油色底 + 蜜桃／薄荷／薰衣草／玫瑰柔色漸層 + 圓潤字體 Fredoka + 手寫感 Caveat 點綴。每張 day cover 用不同柔色背景，按鈕圓角 + 厚邊陰影像繪本貼紙。最容易讓「家長帶孩子一起看」。</div>
     </a>
-    <a class="opt opt-iter" href="./bj-4.html">
-      <div class="opt-title">BJ-4 // Brutal</div>
-      <div class="opt-name">硬邊工程稿 · ASCII / 2px 邊框 / 沒漸層</div>
-      <div class="opt-desc">去 gradient、去 glitch、強化 grid（2px borders 切開所有區塊）。標籤用 <code>[FORBIDDEN-PLANETS-V1]</code> 風 ASCII 包覆，按鈕加 <code>[ ]</code> 框。Bebas Neue 大標 + JetBrains Mono 全內文。最工程線稿、最像「真實機構文件」。</div>
+    <a class="opt opt-new" href="./n4.html">
+      <div class="opt-title">N4 // Webb Telescope</div>
+      <div class="opt-name">韋伯望遠鏡 · 星雲攝影級漸層</div>
+      <div class="opt-desc">Hero 模仿 JWST 拍的 Carina Nebula —— 紫粉藍橘多層 radial gradient + 散布星塵 + 純白超細 Inter。極簡 typography（200 weight），最現代、最 2026、最像太空攝影展。</div>
     </a>
+    <a class="opt opt-new" href="./n5.html">
+      <div class="opt-title">N5 // Tokyo Konbini Sci-Fi</div>
+      <div class="opt-name">日系 90s 科幻 · 深 teal + 螢光粉黃</div>
+      <div class="opt-desc">深 teal #062a30 + 螢光粉 + 鎢黃 + 牛奶白。垂直粉色 ribbon 寫「禁區星球獵人」直書，DotGothic16 像素風中文，hero 三行字三色（黃／白／粉），加上 NEW / LIMITED / 2026 夏 商品貼紙。最有「特殊／酷／不一樣」的差異化記憶點。</div>
+    </a>
+  </div>
+
+  <div class="section-title">ITERATION 2 — BJ 延伸</div>
+  <div class="opts">
+    <a class="opt opt-iter" href="./bj-1.html"><div class="opt-title">BJ-1 // Mission Control</div><div class="opt-name">CRT 螢幕框 + scanline + LED</div><div class="opt-desc">HUD 感最強，最像 NASA 任務直播。</div></a>
+    <a class="opt opt-iter" href="./bj-2.html"><div class="opt-title">BJ-2 // Cinema</div><div class="opt-name">寬銀幕 hero + 星雲漸層</div><div class="opt-desc">BBC Planet Earth × Mass Effect 海報。</div></a>
+    <a class="opt opt-iter" href="./bj-3.html"><div class="opt-title">BJ-3 // Deep Violet</div><div class="opt-name">紫主導 + 金色第二主色</div><div class="opt-desc">沉穩深空檔案室。</div></a>
+    <a class="opt opt-iter" href="./bj-4.html"><div class="opt-title">BJ-4 // Brutal</div><div class="opt-name">硬邊工程稿 + ASCII</div><div class="opt-desc">最像「真實機構文件」。</div></a>
   </div>
 
   <div class="section-title">ITERATION 1 — 起點</div>
   <div class="opts">
-    <a class="opt" href="./b.html"><div class="opt-title">Option B</div><div class="opt-name">Detective Spec Sheet · 偵測檔案感</div><div class="opt-desc">深空藍 + 螢光青 + 警示橘。Bebas Neue / Space Mono。</div></a>
-    <a class="opt" href="./j.html"><div class="opt-title">Option J</div><div class="opt-name">Cyberpunk Neon · 賽博龐克霓虹</div><div class="opt-desc">深紫黑 + 霓虹粉紫 + 電氣青 + 鈷紫 + 鎢黃。Orbitron + glitch。</div></a>
-    <a class="opt opt-bj" href="./bj.html"><div class="opt-title">Option BJ ★ 你選的</div><div class="opt-name">BJ Hybrid · 偵測檔案 × 霓虹混搭</div><div class="opt-desc">B 的 hero 結構 + J 的霓虹色 + glitch h1 + 橘 CTA。grid bg。</div></a>
+    <a class="opt" href="./b.html"><div class="opt-title">Option B</div><div class="opt-name">Detective Spec Sheet</div><div class="opt-desc">深空藍 + 螢光青 + 警示橘。</div></a>
+    <a class="opt" href="./j.html"><div class="opt-title">Option J</div><div class="opt-name">Cyberpunk Neon</div><div class="opt-desc">深紫黑 + 霓虹粉紫 + 電氣青 + 鈷紫 + 鎢黃。</div></a>
+    <a class="opt opt-bj" href="./bj.html"><div class="opt-title">Option BJ ★ 你選的</div><div class="opt-name">BJ Hybrid</div><div class="opt-desc">B 結構 + J 霓虹 + glitch + 橘 CTA。</div></a>
   </div>
 
   <div class="footer">
-    選好回我「<code>BJ-1</code>」「<code>BJ-2</code>」「<code>BJ-3</code>」「<code>BJ-4</code>」即可。<br>
-    也可以說「BJ-2 但保留 BJ-1 的 CRT 框」這類局部混搭。<br>
-    決定後，我把方向重寫進 <code>content/v3-photos/space.json</code> 的 cssBlock，re-assemble + push 到 WP block <code>76072</code>。
+    選好回我「<code>N1</code>」「<code>N3</code>」這類字母即可。<br>
+    也可以說「N4 但用 BJ-1 的 CRT 框」「N3 風格 + 太空主題色換 N2 的金箔」這類混搭。<br>
+    決定後，我把方向重寫進 <code>content/v3-photos/space.json</code>，re-assemble + push 到 WP block <code>76072</code>。
   </div>
 </div>
 </body>

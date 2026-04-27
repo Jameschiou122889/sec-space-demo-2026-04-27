@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Space · N4 Webb Telescope</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;700&family=IBM+Plex+Mono:wght@400&family=Noto+Sans+TC:wght@200;300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void: #000004;
+    --void-2: #0a0e1c;
+    --nebula-pink: #ff8fa8;
+    --nebula-cyan: #6dccff;
+    --nebula-orange: #ffaa55;
+    --nebula-violet: #a085ff;
+    --gold-warm: #ffce6f;
+    --text: #ffffff;
+    --text-sub: rgba(255,255,255,0.6);
+    --text-faint: rgba(255,255,255,0.35);
+    --line: rgba(255,255,255,0.1);
+    --font-h: "Inter", "Noto Sans TC", sans-serif;
+    --font-d: "IBM Plex Mono", monospace;
+    --font-b: "Inter", "Noto Sans TC", sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-b); color: var(--text); background: var(--void); line-height: 1.65; font-weight: 200; }
+
+  .nav { position: sticky; top: 0; z-index: 100; background: rgba(0,0,4,0.7); backdrop-filter: blur(12px); color: var(--text); padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-d); font-size: 11px; letter-spacing: 0.18em; border-bottom: 1px solid var(--line); }
+  .nav a { color: var(--nebula-cyan); text-decoration: none; }
+
+  /* HERO — Webb image aesthetic */
+  .hero { position: relative; min-height: 96vh; padding: 80px 24px 60px; display: flex; align-items: flex-end; overflow: hidden;
+    background:
+      radial-gradient(ellipse 140% 90% at 70% 60%, rgba(160,133,255,0.5) 0%, transparent 35%),
+      radial-gradient(ellipse 120% 80% at 30% 50%, rgba(255,143,168,0.4) 0%, transparent 35%),
+      radial-gradient(ellipse 100% 70% at 50% 30%, rgba(255,170,85,0.35) 0%, transparent 30%),
+      radial-gradient(ellipse 80% 60% at 80% 90%, rgba(109,204,255,0.3) 0%, transparent 35%),
+      radial-gradient(ellipse 100% 100% at 50% 100%, rgba(0,0,4,1) 0%, transparent 60%),
+      var(--void);
+  }
+  /* Star dust */
+  .hero::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+    background-image:
+      radial-gradient(1px 1px at 18% 22%, white, transparent 50%),
+      radial-gradient(1px 1px at 38% 18%, white, transparent 50%),
+      radial-gradient(1px 1px at 65% 32%, white, transparent 50%),
+      radial-gradient(1px 1px at 82% 14%, white, transparent 50%),
+      radial-gradient(1px 1px at 12% 55%, white, transparent 50%),
+      radial-gradient(1px 1px at 92% 65%, white, transparent 50%),
+      radial-gradient(1px 1px at 28% 78%, white, transparent 50%),
+      radial-gradient(1px 1px at 55% 88%, white, transparent 50%),
+      radial-gradient(2px 2px at 70% 25%, var(--gold-warm), transparent 50%),
+      radial-gradient(1.5px 1.5px at 22% 70%, var(--nebula-cyan), transparent 50%),
+      radial-gradient(2px 2px at 88% 35%, var(--nebula-pink), transparent 50%);
+    background-size: 800px 1000px; opacity: 0.85;
+  }
+  .hero-inner { position: relative; max-width: 1200px; margin: 0 auto; width: 100%; }
+  .hero-meta { font-family: var(--font-d); font-size: 11px; color: var(--text-faint); letter-spacing: 0.32em; margin-bottom: 36px; text-transform: uppercase; }
+  .hero h1 { font-family: var(--font-h); font-size: 6.4rem; line-height: 1.0; color: var(--text); font-weight: 200; max-width: 14ch; letter-spacing: -0.02em; }
+  .hero h1 strong { font-weight: 700; color: var(--gold-warm); }
+  @media (max-width: 768px) { .hero h1 { font-size: 3.4rem; } }
+  .hero .lead { color: var(--text-sub); font-size: 1.15rem; margin-top: 20px; max-width: 56ch; font-weight: 300; }
+  .hero .lead strong { font-weight: 700; color: var(--text); }
+  .hero-bottom { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 24px; margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--line); }
+  .hero .stats { display: flex; gap: 36px; }
+  .hero .stat .num { font-family: var(--font-h); font-size: 2.2rem; color: var(--text); font-weight: 200; }
+  .hero .stat .label { font-family: var(--font-d); font-size: 10px; color: var(--text-sub); letter-spacing: 0.2em; text-transform: uppercase; margin-top: 2px; }
+  .hero .cta { display: inline-block; background: var(--text); color: var(--void); padding: 16px 36px; font-family: var(--font-d); font-size: 12px; font-weight: 400; letter-spacing: 0.22em; text-decoration: none; text-transform: uppercase; transition: all 0.18s; }
+  .hero .cta:hover { background: var(--gold-warm); }
+
+  /* MARQUEE */
+  .marquee { background: var(--void-2); padding: 14px 0; overflow: hidden; border-bottom: 1px solid var(--line); }
+  .marquee-track { display: flex; gap: 56px; animation: mq 80s linear infinite; width: max-content; }
+  .marquee span { font-family: var(--font-d); font-size: 11px; color: var(--text-sub); letter-spacing: 0.22em; text-transform: uppercase; white-space: nowrap; }
+  @keyframes mq { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* FEATURED */
+  .featured { padding: 80px 24px; max-width: 1200px; margin: 0 auto; }
+  .featured h2 { font-family: var(--font-h); font-size: 2.4rem; margin-bottom: 8px; font-weight: 200; letter-spacing: -0.01em; }
+  .featured h2 strong { font-weight: 700; color: var(--gold-warm); }
+  .featured .sub { color: var(--text-sub); margin-bottom: 36px; font-family: var(--font-d); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; }
+  .cards-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--line); }
+  @media (max-width: 1024px) { .cards-row { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 600px) { .cards-row { grid-template-columns: repeat(2, 1fr); } }
+  .card { background: var(--void); padding: 24px 20px; transition: all 0.2s; }
+  .card:hover { background: var(--void-2); }
+  .card-tag { font-family: var(--font-d); font-size: 9px; color: var(--text-faint); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 14px; }
+  .card-title { font-family: var(--font-h); font-size: 1.3rem; color: var(--text); margin-bottom: 8px; font-weight: 500; }
+  .card-desc { font-size: 0.88rem; color: var(--text-sub); line-height: 1.55; font-weight: 300; }
+  .card-icon { width: 100%; aspect-ratio: 1; margin-bottom: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem;
+    background: radial-gradient(circle at 50% 50%, rgba(160,133,255,0.18) 0%, var(--void) 60%);
+  }
+  .card:nth-child(2) .card-icon { background: radial-gradient(circle at 50% 50%, rgba(255,170,85,0.18) 0%, var(--void) 60%); }
+  .card:nth-child(3) .card-icon { background: radial-gradient(circle at 50% 50%, rgba(109,204,255,0.18) 0%, var(--void) 60%); }
+  .card:nth-child(4) .card-icon { background: radial-gradient(circle at 50% 50%, rgba(255,206,111,0.18) 0%, var(--void) 60%); }
+  .card:nth-child(5) .card-icon { background: radial-gradient(circle at 50% 50%, rgba(255,143,168,0.18) 0%, var(--void) 60%); }
+
+  /* DAYS */
+  .days { padding: 64px 24px; max-width: 1200px; margin: 0 auto; }
+  .days h2 { font-family: var(--font-h); font-size: 2.4rem; text-align: center; margin-bottom: 48px; font-weight: 200; letter-spacing: -0.01em; }
+  .days h2 strong { font-weight: 700; color: var(--gold-warm); }
+  .day-cover { padding: 56px 32px 36px; margin-bottom: 1px; position: relative; min-height: 220px; overflow: hidden;
+    background:
+      radial-gradient(ellipse 80% 100% at 80% 50%, rgba(160,133,255,0.3) 0%, transparent 50%),
+      var(--void);
+  }
+  .day-cover.d2 { background: radial-gradient(ellipse 80% 100% at 80% 50%, rgba(255,143,168,0.3) 0%, transparent 50%), radial-gradient(ellipse 60% 80% at 30% 70%, rgba(255,170,85,0.2) 0%, transparent 50%), var(--void); }
+  .day-cover.d3 { background: radial-gradient(ellipse 80% 100% at 80% 50%, rgba(109,204,255,0.3) 0%, transparent 50%), var(--void); }
+  .day-cover.d4 { background: radial-gradient(ellipse 80% 100% at 80% 50%, rgba(255,206,111,0.3) 0%, transparent 50%), var(--void); }
+  .day-cover.d5 { background: radial-gradient(ellipse 80% 100% at 80% 50%, rgba(160,133,255,0.3) 0%, transparent 50%), radial-gradient(ellipse 60% 80% at 30% 70%, rgba(255,143,168,0.2) 0%, transparent 50%), var(--void); }
+  .day-cover::before { content: attr(data-tag); position: absolute; top: 22px; left: 32px; font-family: var(--font-d); font-size: 11px; color: var(--text-sub); letter-spacing: 0.32em; text-transform: uppercase; }
+  .day-cover h3 { font-family: var(--font-h); font-size: 2.2rem; margin-top: 14px; font-weight: 200; letter-spacing: -0.01em; }
+  .day-cover h3 strong { font-weight: 700; color: var(--gold-warm); }
+  .day-cover.d2 h3 strong { color: var(--nebula-pink); }
+  .day-cover.d3 h3 strong { color: var(--nebula-cyan); }
+  .day-cover.d5 h3 strong { color: var(--nebula-violet); }
+  .day-cover p { color: var(--text-sub); margin-top: 8px; max-width: 580px; font-weight: 300; }
+
+  /* CTA */
+  .cta-section { padding: 100px 24px; text-align: center; position: relative; overflow: hidden;
+    background:
+      radial-gradient(ellipse 60% 80% at 50% 100%, rgba(160,133,255,0.3) 0%, transparent 60%),
+      var(--void);
+  }
+  .cta-section .kicker { font-family: var(--font-d); font-size: 11px; color: var(--text-sub); letter-spacing: 0.4em; text-transform: uppercase; margin-bottom: 22px; }
+  .cta-section h2 { font-family: var(--font-h); font-size: 3.6rem; line-height: 1.05; font-weight: 200; max-width: 22ch; margin: 0 auto; letter-spacing: -0.02em; }
+  .cta-section h2 strong { font-weight: 700; color: var(--gold-warm); }
+  .cta-section .btn { display: inline-block; margin-top: 36px; background: var(--text); color: var(--void); padding: 18px 44px; font-family: var(--font-d); font-size: 13px; font-weight: 400; letter-spacing: 0.24em; text-decoration: none; text-transform: uppercase; }
+  .cta-section .schedule { font-family: var(--font-d); font-size: 11px; color: var(--text-sub); margin-top: 24px; letter-spacing: 0.2em; }
+</style>
+</head>
+<body>
+<nav class="nav">
+  <span>SEC // SPACE HUNTER · N4 · WEBB TELESCOPE</span>
+  <a href="../">← BACK</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-meta">JWST-CAPTURED IMAGE · CARINA NEBULA · 2026 SUMMER PROGRAM</div>
+    <h1>Five Forbidden <strong>Worlds</strong></h1>
+    <p class="lead">人類還沒去過的地方，<strong>我們先去</strong>。5 顆禁區星球、5 天 20 堂、10 件帶回家的獵人作品 — 從牛頓第三定律到甲烷化學，從引力逃逸到再入大氣。</p>
+    <div class="hero-bottom">
+      <div class="stats">
+        <div class="stat"><div class="num">05</div><div class="label">Forbidden Planets</div></div>
+        <div class="stat"><div class="num">10</div><div class="label">Take-home Artifacts</div></div>
+        <div class="stat"><div class="num">1:7</div><div class="label">Mentor Ratio</div></div>
+      </div>
+      <a class="cta" href="#">立即報名 →</a>
+    </div>
+  </div>
+</section>
+
+<div class="marquee">
+  <div class="marquee-track">
+    <span>ROCKET PROPULSION</span><span>GRAVITY ESCAPE</span><span>JOVIAN MAGNETOSPHERE</span><span>EUROPA SUBSURFACE OCEAN</span><span>TITAN METHANE LAKES</span><span>EXTREMOPHILES</span><span>ATMOSPHERIC RE-ENTRY</span><span>ORBITAL MECHANICS</span>
+    <span>ROCKET PROPULSION</span><span>GRAVITY ESCAPE</span><span>JOVIAN MAGNETOSPHERE</span><span>EUROPA SUBSURFACE OCEAN</span><span>TITAN METHANE LAKES</span><span>EXTREMOPHILES</span><span>ATMOSPHERIC RE-ENTRY</span><span>ORBITAL MECHANICS</span>
+  </div>
+</div>
+
+<section class="featured">
+  <h2>5 種能力解鎖 + <strong>10 件帶回家</strong></h2>
+  <p class="sub">— ABILITIES · TAKEAWAYS —</p>
+  <div class="cards-row">
+    <div class="card"><div class="card-icon">🚀</div><div class="card-tag">DAY 1 · ABILITY 01</div><div class="card-title">推進與引力</div><div class="card-desc">牛頓第三定律 + 火箭推進 + 引力場逃逸。</div></div>
+    <div class="card"><div class="card-icon">🌋</div><div class="card-tag">DAY 2 · ABILITY 02</div><div class="card-title">磁場與輻射</div><div class="card-desc">木星磁場 + 太陽輻射 + 磁流體導向。</div></div>
+    <div class="card"><div class="card-icon">❄️</div><div class="card-tag">DAY 3 · ABILITY 03</div><div class="card-title">極寒與生命</div><div class="card-desc">冰下海洋 + 嗜極生命 + 過濾淨水。</div></div>
+    <div class="card"><div class="card-icon">⛽</div><div class="card-tag">DAY 4 · ABILITY 04</div><div class="card-title">燃料與化學</div><div class="card-desc">甲烷海洋 + 化學能轉換 + 外星農業。</div></div>
+    <div class="card"><div class="card-icon">🛰️</div><div class="card-tag">DAY 5 · ABILITY 05</div><div class="card-title">導航與返航</div><div class="card-desc">軌道力學 + 大氣再入 + 通訊延遲。</div></div>
+  </div>
+</section>
+
+<section class="days">
+  <h2>5 顆<strong>禁區星球</strong></h2>
+  <div class="day-cover" data-tag="DAY 01 · LAUNCH"><h3>獵人基地：<strong>逃離地球</strong></h3><p>火箭推進 + 夯土發射台 + 引力實驗 + 火箭大賽。</p></div>
+  <div class="day-cover d2" data-tag="DAY 02 · IO 伊歐"><h3>地獄之月：<strong>火山與磁場</strong></h3><p>太陽系最活躍火山世界。木星磁場塑形物質、熔岩湖、SO₂ 大氣。</p></div>
+  <div class="day-cover d3" data-tag="DAY 03 · EUROPA"><h3>冰封海洋：<strong>尋找生命</strong></h3><p>冰殼下藏著比地球海洋多 2 倍水量的暗海。</p></div>
+  <div class="day-cover d4" data-tag="DAY 04 · TITAN"><h3>甲烷世界：<strong>另一種化學</strong></h3><p>地球之外唯一有液體湖泊的星球。</p></div>
+  <div class="day-cover d5" data-tag="DAY 05 · RETURN"><h3>返航地球：<strong>帶著發現回家</strong></h3><p>UFO 解構、外星生命設想、太空引擎、最終獵人日誌發表會。</p></div>
+</section>
+
+<section class="cta-section">
+  <div class="kicker">── BOOK YOUR SEAT ──</div>
+  <h2>五天，<strong>五顆禁區星球</strong>。<br>讓孩子先去人類還沒去過的地方。</h2>
+  <a class="btn" href="#">立即報名 →</a>
+  <div class="schedule">2026 夏令營梯次：6 月底起 / 7 月 / 8 月每月開班，每梯 5 天</div>
+</section>
+</body>
+</html>

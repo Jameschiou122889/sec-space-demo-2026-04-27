@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Space · N1 NASA Archive</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,500;0,700;1,500&family=IBM+Plex+Mono:wght@400;500;700&family=Noto+Serif+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f5f1e6;
+    --paper-2: #ebe5d4;
+    --ink: #1a1d20;
+    --ink-sub: #5a5e63;
+    --red: #c1272d;
+    --blue: #1d3a8a;
+    --line: #c8c0a8;
+    --font-h: "EB Garamond", "Noto Serif TC", serif;
+    --font-d: "IBM Plex Mono", monospace;
+    --font-b: "Noto Serif TC", serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-b); color: var(--ink); background: var(--paper); line-height: 1.7; }
+
+  .nav { position: sticky; top: 0; z-index: 100; background: var(--paper); color: var(--ink); padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-d); font-size: 11px; letter-spacing: 0.18em; border-bottom: 1px solid var(--line); }
+  .nav a { color: var(--red); text-decoration: none; }
+
+  /* HERO — NASA technical document */
+  .hero { padding: 56px 32px 48px; max-width: 1100px; margin: 0 auto; position: relative; }
+  .doc-meta { display: flex; justify-content: space-between; gap: 24px; margin-bottom: 24px; padding-bottom: 14px; border-bottom: 1px solid var(--line); font-family: var(--font-d); font-size: 11px; color: var(--ink-sub); letter-spacing: 0.12em; }
+  .doc-meta span:first-child { color: var(--red); }
+  .doc-meta span:last-child { color: var(--blue); }
+
+  .hero h1 { font-family: var(--font-h); font-size: 5.4rem; line-height: 1.0; color: var(--ink); font-weight: 500; max-width: 16ch; }
+  .hero h1 em { font-style: italic; color: var(--blue); font-weight: 700; }
+  @media (max-width: 768px) { .hero h1 { font-size: 3.4rem; } }
+  .hero .subtitle { font-family: var(--font-h); font-style: italic; color: var(--ink-sub); font-size: 1.4rem; margin-top: 8px; max-width: 36ch; }
+  .hero .lead { color: var(--ink); font-size: 1rem; margin-top: 18px; max-width: 50ch; }
+
+  /* Two-column technical layout */
+  .hero-cols { display: grid; grid-template-columns: 7fr 5fr; gap: 32px; margin-top: 36px; padding-top: 24px; border-top: 2px solid var(--ink); }
+  @media (max-width: 768px) { .hero-cols { grid-template-columns: 1fr; gap: 16px; } }
+  .hero-col h3 { font-family: var(--font-d); font-size: 11px; color: var(--red); letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+  .hero-col p { font-size: 0.92rem; color: var(--ink); }
+  .hero .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 24px; padding: 16px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .hero .stat .num { font-family: var(--font-h); font-size: 2.2rem; color: var(--red); font-weight: 700; }
+  .hero .stat .label { font-family: var(--font-d); font-size: 10px; color: var(--ink-sub); letter-spacing: 0.15em; text-transform: uppercase; }
+  .hero .cta { display: inline-block; margin-top: 20px; background: var(--red); color: var(--paper); padding: 12px 32px; font-family: var(--font-d); font-size: 12px; font-weight: 700; letter-spacing: 0.2em; text-decoration: none; text-transform: uppercase; }
+
+  /* MARQUEE */
+  .marquee { background: var(--paper-2); padding: 12px 0; overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .marquee-track { display: flex; gap: 36px; animation: mq 70s linear infinite; width: max-content; }
+  .marquee span { font-family: var(--font-d); font-size: 11px; color: var(--ink-sub); letter-spacing: 0.22em; text-transform: uppercase; white-space: nowrap; padding-left: 36px; border-left: 1px solid var(--line); }
+  @keyframes mq { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* FEATURED */
+  .featured { padding: 64px 32px; max-width: 1100px; margin: 0 auto; }
+  .featured h2 { font-family: var(--font-h); font-size: 2.8rem; text-align: center; margin-bottom: 8px; font-weight: 500; }
+  .featured h2 em { font-style: italic; color: var(--red); }
+  .featured .sub { text-align: center; color: var(--ink-sub); margin-bottom: 36px; font-family: var(--font-d); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; }
+  .cards-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink); }
+  @media (max-width: 1024px) { .cards-row { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 600px) { .cards-row { grid-template-columns: repeat(2, 1fr); } }
+  .card { padding: 18px 16px; border-right: 1px solid var(--line); }
+  .card:last-child { border-right: none; }
+  .card-tag { font-family: var(--font-d); font-size: 9px; color: var(--red); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 8px; }
+  .card-title { font-family: var(--font-h); font-size: 1.4rem; color: var(--ink); margin-bottom: 6px; font-weight: 700; }
+  .card-desc { font-size: 0.86rem; color: var(--ink-sub); line-height: 1.55; }
+  .card-icon { width: 100%; aspect-ratio: 1; background: var(--paper-2); margin-bottom: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; border: 1px solid var(--line); }
+
+  /* DAYS */
+  .days { padding: 64px 32px; max-width: 1100px; margin: 0 auto; }
+  .days h2 { font-family: var(--font-h); font-size: 2.8rem; text-align: center; margin-bottom: 36px; font-weight: 500; }
+  .days h2 em { font-style: italic; color: var(--red); }
+  .day-cover { padding: 28px 28px 24px; margin-bottom: 0; position: relative; background: var(--paper); border: 1px solid var(--line); border-bottom: none; display: grid; grid-template-columns: 100px 1fr; gap: 24px; align-items: start; }
+  .day-cover:last-child { border-bottom: 1px solid var(--line); }
+  .day-cover .day-num { font-family: var(--font-h); font-size: 4.5rem; color: var(--red); font-weight: 700; line-height: 0.85; }
+  .day-cover.d2 .day-num { color: #c1272d; }
+  .day-cover.d3 .day-num { color: var(--blue); }
+  .day-cover.d4 .day-num { color: #b8860b; }
+  .day-cover.d5 .day-num { color: #4a3a8a; }
+  .day-cover .day-tag { font-family: var(--font-d); font-size: 10px; color: var(--ink-sub); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 6px; }
+  .day-cover h3 { font-family: var(--font-h); font-size: 1.6rem; font-weight: 700; }
+  .day-cover h3 em { font-style: italic; color: var(--red); }
+  .day-cover.d3 h3 em { color: var(--blue); }
+  .day-cover p { color: var(--ink-sub); margin-top: 6px; max-width: 600px; font-size: 0.92rem; }
+
+  /* CTA */
+  .cta-section { padding: 80px 32px; text-align: center; background: var(--paper-2); border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink); }
+  .cta-section .kicker { font-family: var(--font-d); font-size: 11px; color: var(--red); letter-spacing: 0.32em; text-transform: uppercase; margin-bottom: 18px; }
+  .cta-section h2 { font-family: var(--font-h); font-size: 3rem; line-height: 1.15; font-weight: 500; max-width: 24ch; margin: 0 auto; }
+  .cta-section h2 em { font-style: italic; color: var(--red); }
+  .cta-section .btn { display: inline-block; margin-top: 28px; background: var(--ink); color: var(--paper); padding: 16px 44px; font-family: var(--font-d); font-size: 13px; font-weight: 700; letter-spacing: 0.22em; text-decoration: none; text-transform: uppercase; }
+  .cta-section .schedule { font-family: var(--font-d); font-size: 11px; color: var(--ink-sub); margin-top: 20px; letter-spacing: 0.15em; }
+</style>
+</head>
+<body>
+<nav class="nav">
+  <span>SEC // SPACE HUNTER · N1 · NASA ARCHIVE</span>
+  <a href="../">← BACK</a>
+</nav>
+
+<section class="hero">
+  <div class="doc-meta">
+    <span>SEC-TM-2026-07 · TECHNICAL MEMORANDUM</span>
+    <span>FILED 2026.04.27 · PAGE 1 OF 1</span>
+  </div>
+  <h1>Five Forbidden <em>Worlds</em></h1>
+  <p class="subtitle">A field guide for hunters age six through twelve.</p>
+  <p class="lead">人類還沒去過的地方，我們先去。本營五日記錄五顆禁區星球（伊歐、歐羅巴、泰坦、加上地球出發與返航）的觀察筆記、實作項目與帶回家的研究員作品。</p>
+
+  <div class="hero-cols">
+    <div class="hero-col">
+      <h3>Mission Statement</h3>
+      <p>從牛頓第三定律到甲烷化學，從引力逃逸到再入大氣，五日二十堂連貫敘事。每堂以動手 DIY 為入口、以原理推導為出口；無想像力填充，全部對應 NASA / ESA 真實任務資料。</p>
+    </div>
+    <div class="hero-col">
+      <h3>Specifications</h3>
+      <p style="font-family:var(--font-d);font-size:0.85rem;line-height:1.7">Class .......... 6-12 yr<br>Duration ........ 5 days · 20 lessons<br>Ratio ........... 1 : 7<br>Output .......... 10 take-home artifacts<br>Schedule ........ 09:30–16:30 daily</p>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="num">5</div><div class="label">禁區星球</div></div>
+    <div class="stat"><div class="num">10</div><div class="label">件獵人作品</div></div>
+    <div class="stat"><div class="num">1:7</div><div class="label">照顧比</div></div>
+  </div>
+  <a class="cta" href="#">立即報名 →</a>
+</section>
+
+<div class="marquee">
+  <div class="marquee-track">
+    <span>ROCKET PROPULSION</span><span>GRAVITY ESCAPE</span><span>JOVIAN MAGNETOSPHERE</span><span>EUROPA SUBSURFACE OCEAN</span><span>TITAN METHANE LAKES</span><span>EXTREMOPHILES</span><span>ATMOSPHERIC RE-ENTRY</span><span>ORBITAL MECHANICS</span>
+    <span>ROCKET PROPULSION</span><span>GRAVITY ESCAPE</span><span>JOVIAN MAGNETOSPHERE</span><span>EUROPA SUBSURFACE OCEAN</span><span>TITAN METHANE LAKES</span><span>EXTREMOPHILES</span><span>ATMOSPHERIC RE-ENTRY</span><span>ORBITAL MECHANICS</span>
+  </div>
+</div>
+
+<section class="featured">
+  <h2>5 種<em>能力解鎖</em> + 10 件帶回家</h2>
+  <p class="sub">— ABILITIES · TAKEAWAYS —</p>
+  <div class="cards-row">
+    <div class="card"><div class="card-icon">🚀</div><div class="card-tag">DAY 1 · ABILITY 01</div><div class="card-title">推進與引力</div><div class="card-desc">牛頓第三定律 + 火箭推進 + 引力場逃逸。</div></div>
+    <div class="card"><div class="card-icon">🌋</div><div class="card-tag">DAY 2 · ABILITY 02</div><div class="card-title">磁場與輻射</div><div class="card-desc">木星磁場 + 太陽輻射 + 磁流體導向。</div></div>
+    <div class="card"><div class="card-icon">❄️</div><div class="card-tag">DAY 3 · ABILITY 03</div><div class="card-title">極寒與生命</div><div class="card-desc">冰下海洋 + 嗜極生命 + 過濾淨水。</div></div>
+    <div class="card"><div class="card-icon">⛽</div><div class="card-tag">DAY 4 · ABILITY 04</div><div class="card-title">燃料與化學</div><div class="card-desc">甲烷海洋 + 化學能轉換 + 外星農業。</div></div>
+    <div class="card"><div class="card-icon">🛰️</div><div class="card-tag">DAY 5 · ABILITY 05</div><div class="card-title">導航與返航</div><div class="card-desc">軌道力學 + 大氣再入 + 通訊延遲。</div></div>
+  </div>
+</section>
+
+<section class="days">
+  <h2>5 顆<em>禁區星球</em></h2>
+  <div class="day-cover"><div class="day-num">01</div><div><div class="day-tag">DAY 01 · LAUNCH</div><h3>獵人基地：<em>逃離地球</em></h3><p>火箭推進 + 夯土發射台 + 引力實驗 + 火箭大賽。</p></div></div>
+  <div class="day-cover d2"><div class="day-num">02</div><div><div class="day-tag">DAY 02 · IO 伊歐</div><h3>地獄之月：<em>火山與磁場</em></h3><p>太陽系最活躍火山世界。木星磁場塑形物質、熔岩湖、SO₂ 大氣。</p></div></div>
+  <div class="day-cover d3"><div class="day-num">03</div><div><div class="day-tag">DAY 03 · EUROPA 歐羅巴</div><h3>冰封海洋：<em>尋找生命</em></h3><p>冰殼下藏著比地球海洋多 2 倍水量的暗海。</p></div></div>
+  <div class="day-cover d4"><div class="day-num">04</div><div><div class="day-tag">DAY 04 · TITAN 泰坦</div><h3>甲烷世界：<em>另一種化學</em></h3><p>地球之外唯一有液體湖泊的星球。</p></div></div>
+  <div class="day-cover d5"><div class="day-num">05</div><div><div class="day-tag">DAY 05 · RETURN</div><h3>返航地球：<em>帶著發現回家</em></h3><p>UFO 解構、外星生命設想、太空引擎、最終獵人日誌發表會。</p></div></div>
+</section>
+
+<section class="cta-section">
+  <div class="kicker">── BOOK YOUR SEAT ──</div>
+  <h2>五天，<em>五顆禁區星球</em>。讓孩子先去人類還沒去過的地方。</h2>
+  <a class="btn" href="#">立即報名 →</a>
+  <div class="schedule">2026 夏令營梯次：6 月底起 / 7 月 / 8 月每月開班，每梯 5 天</div>
+</section>
+</body>
+</html>
