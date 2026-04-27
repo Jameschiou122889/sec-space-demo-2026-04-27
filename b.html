@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Space · Option B Detective Spec Sheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e1b2c;
+    --bg-2: #16263d;
+    --bg-3: #1d3151;
+    --cyan: #00d4ff;
+    --cyan-soft: rgba(0,212,255,0.18);
+    --cyan-line: rgba(0,212,255,0.35);
+    --orange: #ff6b35;
+    --text: #e8edf5;
+    --text-sub: #9aa8c0;
+    --grid: rgba(0,212,255,0.07);
+    --line: rgba(232,237,245,0.12);
+    --font-h: "Bebas Neue", "Noto Sans TC", sans-serif;
+    --font-d: "Space Mono", monospace;
+    --font-b: "Noto Sans TC", sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-b); color: var(--text); background: var(--bg);
+    background-image: linear-gradient(var(--grid) 1px, transparent 1px),
+                      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 32px 32px; line-height: 1.6;
+  }
+  .nav { position: sticky; top: 0; z-index: 10; background: var(--bg-2); color: var(--cyan); padding: 10px 16px; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-d); font-size: 11px; border-bottom: 1px solid rgba(0,212,255,0.2); }
+  .nav a { color: var(--orange); text-decoration: none; }
+
+  /* HERO — Detective Spec Sheet */
+  .hero { padding: 48px 24px 64px; max-width: 1200px; margin: 0 auto; position: relative; }
+  .hero::before { content: "[ CASE FILE: FORBIDDEN PLANETS ]"; position: absolute; top: 24px; left: 24px; font-family: var(--font-d); font-size: 11px; color: var(--cyan); letter-spacing: 0.32em; }
+  .hero::after { content: "STATUS · CLASSIFIED"; position: absolute; top: 24px; right: 24px; font-family: var(--font-d); font-size: 11px; color: var(--orange); letter-spacing: 0.22em; }
+  .hero-grid { display: grid; grid-template-columns: 7fr 5fr; gap: 48px; padding-top: 48px; }
+  @media (max-width: 768px) { .hero-grid { grid-template-columns: 1fr; gap: 24px; } }
+  .hero h1 { font-family: var(--font-h); font-size: 5.4rem; line-height: 0.92; color: var(--text); letter-spacing: 0.01em; }
+  .hero h1 em { font-style: normal; color: var(--cyan); }
+  .hero .lead { color: var(--text-sub); font-size: 1.05rem; margin-top: 16px; max-width: 42ch; }
+  .hero .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 28px; padding: 18px 0; border-top: 1px solid var(--cyan-line); border-bottom: 1px solid var(--cyan-line); }
+  .hero .stat .num { font-family: var(--font-d); font-size: 1.6rem; color: var(--cyan); font-weight: 700; }
+  .hero .stat .label { font-family: var(--font-d); font-size: 10px; color: var(--text-sub); letter-spacing: 0.15em; text-transform: uppercase; }
+  .hero .cta { display: inline-block; margin-top: 24px; background: var(--orange); color: #0e1b2c; padding: 14px 32px; font-family: var(--font-d); font-size: 12px; font-weight: 700; letter-spacing: 0.2em; text-decoration: none; text-transform: uppercase; }
+  .case-file { background: var(--bg-2); padding: 24px; border: 1px solid var(--cyan-line); }
+  .case-file h3 { font-family: var(--font-d); font-size: 11px; color: var(--cyan); letter-spacing: 0.22em; margin-bottom: 14px; text-transform: uppercase; }
+  .case-file ul { list-style: none; padding: 0; }
+  .case-file li { font-family: var(--font-d); font-size: 0.85rem; color: var(--text-sub); padding: 6px 0; border-bottom: 1px dashed rgba(0,212,255,0.15); }
+  .case-file li::before { content: "▸ "; color: var(--cyan); }
+
+  /* MARQUEE */
+  .marquee { background: var(--bg-2); padding: 14px 0; overflow: hidden; border-top: 1px solid var(--cyan-line); border-bottom: 1px solid var(--cyan-line); }
+  .marquee-track { display: flex; gap: 36px; animation: mq 60s linear infinite; width: max-content; }
+  .marquee span { font-family: var(--font-d); font-size: 11px; color: var(--text-sub); letter-spacing: 0.22em; text-transform: uppercase; white-space: nowrap; padding-left: 36px; border-left: 1px solid var(--cyan-soft); }
+  @keyframes mq { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* FEATURED CARDS */
+  .featured { padding: 64px 24px; max-width: 1200px; margin: 0 auto; }
+  .featured h2 { font-family: var(--font-h); font-size: 3rem; text-align: center; letter-spacing: 0.04em; margin-bottom: 8px; }
+  .featured h2 em { font-style: normal; color: var(--cyan); }
+  .featured .sub { text-align: center; color: var(--text-sub); margin-bottom: 36px; font-family: var(--font-d); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; }
+  .cards-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 24px; }
+  @media (max-width: 1024px) { .cards-row { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 600px) { .cards-row { grid-template-columns: repeat(2, 1fr); } }
+  .card { background: var(--bg-2); border: 1px solid var(--cyan-soft); padding: 18px 14px; transition: all 0.18s; }
+  .card:hover { border-color: var(--cyan); transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,212,255,0.12); }
+  .card-tag { font-family: var(--font-d); font-size: 9px; color: var(--cyan); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 8px; }
+  .card-title { font-family: var(--font-h); font-size: 1.45rem; color: var(--text); letter-spacing: 0.02em; margin-bottom: 6px; }
+  .card-desc { font-size: 0.82rem; color: var(--text-sub); line-height: 1.5; }
+  .card-icon { width: 100%; aspect-ratio: 1; background: var(--bg-3); margin-bottom: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; color: var(--cyan); border: 1px dashed var(--cyan-soft); }
+
+  /* DAY COVERS */
+  .days { padding: 64px 24px; max-width: 1200px; margin: 0 auto; }
+  .days h2 { font-family: var(--font-h); font-size: 3rem; text-align: center; letter-spacing: 0.04em; margin-bottom: 36px; }
+  .day-cover { padding: 44px 28px 32px; margin-bottom: 16px; position: relative; background: linear-gradient(135deg, var(--bg-2) 0%, var(--bg-3) 100%); border-left: 4px solid var(--cyan); }
+  .day-cover.d2 { background: linear-gradient(135deg, #2c1410 0%, #4a1f15 100%); border-left-color: var(--orange); }
+  .day-cover.d3 { background: linear-gradient(135deg, #102838 0%, #143548 100%); border-left-color: #4dd9ff; }
+  .day-cover.d4 { background: linear-gradient(135deg, #2e2418 0%, #3d2e1c 100%); border-left-color: #ffd45a; }
+  .day-cover.d5 { background: linear-gradient(135deg, #1a1830 0%, #251f48 100%); border-left-color: #c47dff; }
+  .day-cover::before { content: attr(data-tag); position: absolute; top: 18px; left: 28px; font-family: var(--font-d); font-size: 10px; color: var(--cyan); letter-spacing: 0.28em; text-transform: uppercase; }
+  .day-cover.d2::before { color: var(--orange); }
+  .day-cover.d3::before { color: #4dd9ff; }
+  .day-cover.d4::before { color: #ffd45a; }
+  .day-cover.d5::before { color: #c47dff; }
+  .day-cover h3 { font-family: var(--font-h); font-size: 2.2rem; letter-spacing: 0.02em; margin-top: 18px; }
+  .day-cover p { color: var(--text-sub); margin-top: 8px; max-width: 600px; }
+
+  /* CTA */
+  .cta-section { padding: 80px 24px; text-align: center; background: var(--bg-2); border-top: 1px solid var(--cyan-line); }
+  .cta-section .kicker { font-family: var(--font-d); font-size: 11px; color: var(--cyan); letter-spacing: 0.32em; text-transform: uppercase; margin-bottom: 18px; }
+  .cta-section h2 { font-family: var(--font-h); font-size: 3.2rem; letter-spacing: 0.02em; line-height: 1.05; }
+  .cta-section h2 em { font-style: normal; color: var(--orange); }
+  .cta-section .btn { display: inline-block; margin-top: 28px; background: var(--orange); color: var(--bg); padding: 18px 44px; font-family: var(--font-d); font-size: 13px; font-weight: 700; letter-spacing: 0.22em; text-decoration: none; text-transform: uppercase; }
+  .cta-section .schedule { font-family: var(--font-d); font-size: 11px; color: var(--text-sub); margin-top: 22px; letter-spacing: 0.15em; }
+</style>
+</head>
+<body>
+<nav class="nav">
+  <span>SEC // SPACE HUNTER · OPT B · DETECTIVE SPEC SHEET</span>
+  <a href="../">← BACK TO INDEX</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-grid">
+    <div>
+      <div style="font-family:var(--font-d);font-size:11px;color:var(--cyan);letter-spacing:0.3em;margin-bottom:18px">── 2026 夏令營 · 6-12 歲 · 5 天 20 堂 ──</div>
+      <h1>Five Forbidden<br>Worlds<br><em>Five Days, Five Hunts</em></h1>
+      <p class="lead">人類還沒去過的地方，我們先去。<br>5 顆禁區星球 · 5 天 20 堂 · 10 件帶回家的獵人作品。</p>
+      <div class="stats">
+        <div class="stat"><div class="num">5</div><div class="label">禁區星球</div></div>
+        <div class="stat"><div class="num">10</div><div class="label">件獵人作品</div></div>
+        <div class="stat"><div class="num">1:7</div><div class="label">照顧比</div></div>
+      </div>
+      <a class="cta" href="#">立即報名 →</a>
+    </div>
+    <div class="case-file">
+      <h3>Case File · 教學案例 V1</h3>
+      <ul>
+        <li>目標：伊歐 Io（木星衛星，太陽系最活躍火山）</li>
+        <li>機制：木星潮汐力 → 內部摩擦熱 → 持續火山噴發</li>
+        <li>演示：磁流體 + 強磁鐵 + 紅外線觀測</li>
+        <li>10 件帶回家：化學火箭、磁流體瓶、淨水過濾器、外星種植杯、探測車、UFO 合成照、單極馬達、獵人日誌⋯</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="marquee">
+  <div class="marquee-track">
+    <span>ROCKET PROPULSION</span><span>GRAVITY ESCAPE</span><span>JOVIAN MAGNETOSPHERE</span><span>EUROPA SUBSURFACE OCEAN</span><span>TITAN METHANE LAKES</span><span>EXTREMOPHILES</span><span>ATMOSPHERIC RE-ENTRY</span><span>ORBITAL MECHANICS</span>
+    <span>ROCKET PROPULSION</span><span>GRAVITY ESCAPE</span><span>JOVIAN MAGNETOSPHERE</span><span>EUROPA SUBSURFACE OCEAN</span><span>TITAN METHANE LAKES</span><span>EXTREMOPHILES</span><span>ATMOSPHERIC RE-ENTRY</span><span>ORBITAL MECHANICS</span>
+  </div>
+</div>
+
+<section class="featured">
+  <h2>5 種<em>能力解鎖</em> + 10 件帶回家</h2>
+  <p class="sub">— ABILITIES · TAKEAWAYS —</p>
+  <div class="cards-row">
+    <div class="card"><div class="card-icon">🚀</div><div class="card-tag">DAY 1 · ABILITY 01</div><div class="card-title">推進與引力</div><div class="card-desc">牛頓第三定律 + 火箭推進 + 引力場逃逸。</div></div>
+    <div class="card"><div class="card-icon">🌋</div><div class="card-tag">DAY 2 · ABILITY 02</div><div class="card-title">磁場與輻射</div><div class="card-desc">木星磁場 + 太陽輻射 + 磁流體導向。</div></div>
+    <div class="card"><div class="card-icon">❄️</div><div class="card-tag">DAY 3 · ABILITY 03</div><div class="card-title">極寒與生命</div><div class="card-desc">冰下海洋 + 嗜極生命 + 過濾淨水。</div></div>
+    <div class="card"><div class="card-icon">⛽</div><div class="card-tag">DAY 4 · ABILITY 04</div><div class="card-title">燃料與化學</div><div class="card-desc">甲烷海洋 + 化學能轉換 + 外星農業。</div></div>
+    <div class="card"><div class="card-icon">🛰️</div><div class="card-tag">DAY 5 · ABILITY 05</div><div class="card-title">導航與返航</div><div class="card-desc">軌道力學 + 大氣再入 + 通訊延遲。</div></div>
+  </div>
+</section>
+
+<section class="days">
+  <h2>5 顆<em>禁區星球</em></h2>
+  <div class="day-cover" data-tag="DAY 01 · LAUNCH">
+    <h3>獵人基地：逃離地球</h3>
+    <p>火箭推進 + 夯土發射台 + 引力實驗 + 火箭大賽。Day 1 從地球出發。</p>
+  </div>
+  <div class="day-cover d2" data-tag="DAY 02 · IO 伊歐">
+    <h3>地獄之月：火山與磁場</h3>
+    <p>太陽系最活躍火山世界。木星磁場塑形物質、熔岩湖、SO₂ 大氣。</p>
+  </div>
+  <div class="day-cover d3" data-tag="DAY 03 · EUROPA 歐羅巴">
+    <h3>冰封海洋：尋找生命</h3>
+    <p>冰殼下藏著比地球海洋多 2 倍水量的暗海。降落、鑽冰、淨水、極寒生存。</p>
+  </div>
+  <div class="day-cover d4" data-tag="DAY 04 · TITAN 泰坦">
+    <h3>甲烷世界：另一種化學</h3>
+    <p>地球之外唯一有液體湖泊（甲烷與乙烷）的星球。火箭燃料、外星農場、探測車。</p>
+  </div>
+  <div class="day-cover d5" data-tag="DAY 05 · RETURN">
+    <h3>返航地球：帶著發現回家</h3>
+    <p>UFO 解構、外星生命設想、太空引擎、最終獵人日誌發表會。</p>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="kicker">── BOOK YOUR SEAT ──</div>
+  <h2>五天，<em>五顆禁區星球</em>。<br>讓孩子先去人類還沒去過的地方。</h2>
+  <a class="btn" href="#">立即報名 →</a>
+  <div class="schedule">2026 夏令營梯次：6 月底起 / 7 月 / 8 月每月開班，每梯 5 天</div>
+</section>
+</body>
+</html>

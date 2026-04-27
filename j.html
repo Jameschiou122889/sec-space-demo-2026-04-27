@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Space · Option J Cyberpunk Neon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@400;500;700&family=Noto+Sans+TC:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0118;
+    --bg-2: #160d2c;
+    --bg-3: #1f1640;
+    --magenta: #ff2d75;
+    --cyan: #00f0ff;
+    --violet: #b347ff;
+    --yellow: #fdfd54;
+    --text: #e6dffa;
+    --text-sub: #9c8ec5;
+    --line: rgba(230,223,250,0.12);
+    --font-h: "Orbitron", "Noto Sans TC", sans-serif;
+    --font-d: "Share Tech Mono", monospace;
+    --font-b: "Rajdhani", "Noto Sans TC", sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-b); color: var(--text); background: var(--bg); line-height: 1.55;
+    background-image:
+      linear-gradient(135deg, rgba(255,45,117,0.06) 0%, transparent 40%),
+      linear-gradient(225deg, rgba(0,240,255,0.06) 0%, transparent 40%);
+  }
+  .nav { position: sticky; top: 0; z-index: 10; background: var(--bg-2); color: var(--cyan); padding: 10px 16px; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-d); font-size: 11px; letter-spacing: 0.18em; border-bottom: 1px solid var(--magenta); }
+  .nav a { color: var(--magenta); text-decoration: none; }
+
+  /* Glitch effect */
+  .glitch { position: relative; display: inline-block; text-shadow: 2px 0 var(--magenta), -2px 0 var(--cyan); }
+
+  /* HERO */
+  .hero { padding: 56px 24px 72px; max-width: 1200px; margin: 0 auto; position: relative; overflow: hidden; }
+  .hero::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, rgba(0,240,255,0.04) 0 1px, transparent 1px 4px); pointer-events: none; }
+  .hero-tag { font-family: var(--font-d); font-size: 11px; color: var(--cyan); letter-spacing: 0.32em; margin-bottom: 24px; }
+  .hero-tag::before { content: ">> "; color: var(--magenta); }
+  .hero h1 { font-family: var(--font-h); font-size: 5.6rem; line-height: 0.95; color: var(--text); letter-spacing: 0.04em; font-weight: 900; text-transform: uppercase; }
+  .hero h1 .row1 { display: block; }
+  .hero h1 .row2 { display: block; color: var(--magenta); margin-top: 4px; }
+  .hero .lead { color: var(--text-sub); font-size: 1.1rem; margin-top: 24px; max-width: 50ch; font-family: var(--font-b); font-weight: 400; }
+  .hero .lead em { color: var(--violet); font-style: normal; font-weight: 700; }
+  .hero .stats { display: flex; gap: 32px; margin-top: 32px; padding: 18px 0; border-top: 1px solid var(--magenta); border-bottom: 1px solid var(--cyan); }
+  .hero .stat .num { font-family: var(--font-h); font-size: 2rem; color: var(--cyan); font-weight: 900; line-height: 1; }
+  .hero .stat .label { font-family: var(--font-d); font-size: 10px; color: var(--text-sub); letter-spacing: 0.18em; text-transform: uppercase; margin-top: 4px; }
+  .hero .cta { display: inline-block; margin-top: 32px; background: var(--magenta); color: var(--bg); padding: 16px 36px; font-family: var(--font-h); font-size: 13px; font-weight: 700; letter-spacing: 0.22em; text-decoration: none; text-transform: uppercase; box-shadow: 0 0 24px rgba(255,45,117,0.5); transition: all 0.18s; }
+  .hero .cta:hover { background: var(--cyan); color: var(--bg); box-shadow: 0 0 24px rgba(0,240,255,0.6); }
+
+  /* MARQUEE */
+  .marquee { background: var(--bg-2); padding: 14px 0; overflow: hidden; border-top: 1px solid var(--magenta); border-bottom: 1px solid var(--cyan); }
+  .marquee-track { display: flex; gap: 36px; animation: mq 50s linear infinite; width: max-content; }
+  .marquee span { font-family: var(--font-d); font-size: 11px; color: var(--text-sub); letter-spacing: 0.22em; text-transform: uppercase; white-space: nowrap; padding-left: 36px; border-left: 1px solid var(--violet); }
+  @keyframes mq { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* FEATURED CARDS */
+  .featured { padding: 64px 24px; max-width: 1200px; margin: 0 auto; }
+  .featured h2 { font-family: var(--font-h); font-size: 2.6rem; text-align: center; letter-spacing: 0.06em; margin-bottom: 8px; font-weight: 700; text-transform: uppercase; }
+  .featured h2 .accent { color: var(--magenta); }
+  .featured .sub { text-align: center; color: var(--text-sub); margin-bottom: 36px; font-family: var(--font-d); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; }
+  .cards-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 24px; }
+  @media (max-width: 1024px) { .cards-row { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 600px) { .cards-row { grid-template-columns: repeat(2, 1fr); } }
+  .card { background: var(--bg-2); border: 1px solid var(--violet); padding: 16px 14px; transition: all 0.2s; position: relative; }
+  .card:hover { border-color: var(--magenta); transform: translateY(-3px); box-shadow: 0 0 22px rgba(255,45,117,0.35); }
+  .card-tag { font-family: var(--font-d); font-size: 9px; color: var(--cyan); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 8px; }
+  .card-title { font-family: var(--font-h); font-size: 1.2rem; color: var(--text); letter-spacing: 0.04em; margin-bottom: 6px; font-weight: 700; text-transform: uppercase; }
+  .card-desc { font-size: 0.88rem; color: var(--text-sub); line-height: 1.55; }
+  .card-icon { width: 100%; aspect-ratio: 1; background: linear-gradient(135deg, var(--bg-3) 0%, var(--bg-2) 100%); margin-bottom: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; color: var(--cyan); border: 1px solid var(--violet); }
+
+  /* DAY COVERS */
+  .days { padding: 64px 24px; max-width: 1200px; margin: 0 auto; }
+  .days h2 { font-family: var(--font-h); font-size: 2.6rem; text-align: center; letter-spacing: 0.06em; margin-bottom: 36px; font-weight: 700; text-transform: uppercase; }
+  .days h2 .accent { color: var(--magenta); }
+  .day-cover { padding: 44px 28px 32px; margin-bottom: 16px; position: relative; background: linear-gradient(135deg, var(--bg-2) 0%, var(--bg-3) 100%); border: 1px solid var(--cyan); }
+  .day-cover.d2 { border-color: var(--magenta); background: linear-gradient(135deg, #2c0822 0%, #4a1234 100%); }
+  .day-cover.d3 { border-color: var(--cyan); background: linear-gradient(135deg, #0a1a30 0%, #0f2848 100%); }
+  .day-cover.d4 { border-color: var(--yellow); background: linear-gradient(135deg, #2a200a 0%, #3d2e0c 100%); }
+  .day-cover.d5 { border-color: var(--violet); background: linear-gradient(135deg, #1a0a30 0%, #2a1248 100%); }
+  .day-cover::before { content: attr(data-tag); position: absolute; top: 18px; left: 28px; font-family: var(--font-d); font-size: 10px; color: var(--cyan); letter-spacing: 0.28em; text-transform: uppercase; }
+  .day-cover.d2::before { color: var(--magenta); }
+  .day-cover.d3::before { color: var(--cyan); }
+  .day-cover.d4::before { color: var(--yellow); }
+  .day-cover.d5::before { color: var(--violet); }
+  .day-cover h3 { font-family: var(--font-h); font-size: 1.9rem; letter-spacing: 0.04em; margin-top: 18px; font-weight: 700; text-transform: uppercase; }
+  .day-cover p { color: var(--text-sub); margin-top: 8px; max-width: 600px; }
+
+  /* CTA */
+  .cta-section { padding: 80px 24px; text-align: center; background: var(--bg-2); border-top: 1px solid var(--magenta); position: relative; overflow: hidden; }
+  .cta-section::before { content: ""; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,45,117,0.08) 0%, transparent 50%, rgba(0,240,255,0.08) 100%); pointer-events: none; }
+  .cta-section .kicker { font-family: var(--font-d); font-size: 11px; color: var(--cyan); letter-spacing: 0.32em; text-transform: uppercase; margin-bottom: 18px; position: relative; }
+  .cta-section h2 { font-family: var(--font-h); font-size: 3rem; letter-spacing: 0.04em; line-height: 1.1; font-weight: 700; text-transform: uppercase; position: relative; }
+  .cta-section h2 .accent { color: var(--magenta); }
+  .cta-section .btn { display: inline-block; margin-top: 28px; background: var(--magenta); color: var(--bg); padding: 18px 44px; font-family: var(--font-h); font-size: 13px; font-weight: 700; letter-spacing: 0.22em; text-decoration: none; text-transform: uppercase; box-shadow: 0 0 28px rgba(255,45,117,0.45); position: relative; }
+  .cta-section .schedule { font-family: var(--font-d); font-size: 11px; color: var(--text-sub); margin-top: 22px; letter-spacing: 0.15em; position: relative; }
+</style>
+</head>
+<body>
+<nav class="nav">
+  <span>SEC // SPACE HUNTER · OPT J · CYBERPUNK NEON</span>
+  <a href="../">← BACK TO INDEX</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-tag">2026 SUMMER · 6-12 YR · 5 DAYS · 20 LESSONS</div>
+  <h1><span class="row1 glitch">FORBIDDEN</span><span class="row2">PLANETS</span></h1>
+  <p class="lead">人類還沒去過的地方，<em>我們先去</em>。<br>5 顆禁區星球 · 5 天 20 堂 · 10 件帶回家的獵人作品。</p>
+  <div class="stats">
+    <div class="stat"><div class="num">05</div><div class="label">禁區星球</div></div>
+    <div class="stat"><div class="num">10</div><div class="label">獵人作品</div></div>
+    <div class="stat"><div class="num">1:7</div><div class="label">照顧比</div></div>
+  </div>
+  <a class="cta" href="#">// INITIATE MISSION →</a>
+</section>
+
+<div class="marquee">
+  <div class="marquee-track">
+    <span>ROCKET PROPULSION</span><span>GRAVITY ESCAPE</span><span>JOVIAN MAGNETOSPHERE</span><span>EUROPA SUBSURFACE OCEAN</span><span>TITAN METHANE LAKES</span><span>EXTREMOPHILES</span><span>ATMOSPHERIC RE-ENTRY</span><span>ORBITAL MECHANICS</span>
+    <span>ROCKET PROPULSION</span><span>GRAVITY ESCAPE</span><span>JOVIAN MAGNETOSPHERE</span><span>EUROPA SUBSURFACE OCEAN</span><span>TITAN METHANE LAKES</span><span>EXTREMOPHILES</span><span>ATMOSPHERIC RE-ENTRY</span><span>ORBITAL MECHANICS</span>
+  </div>
+</div>
+
+<section class="featured">
+  <h2>5 ABILITIES <span class="accent">// 10 ARTIFACTS</span></h2>
+  <p class="sub">— SKILL UNLOCK + TAKE-HOME LOG —</p>
+  <div class="cards-row">
+    <div class="card"><div class="card-icon">🚀</div><div class="card-tag">DAY 1 · ABILITY 01</div><div class="card-title">推進與引力</div><div class="card-desc">牛頓第三定律 + 火箭推進 + 引力場逃逸。</div></div>
+    <div class="card"><div class="card-icon">🌋</div><div class="card-tag">DAY 2 · ABILITY 02</div><div class="card-title">磁場與輻射</div><div class="card-desc">木星磁場 + 太陽輻射 + 磁流體導向。</div></div>
+    <div class="card"><div class="card-icon">❄️</div><div class="card-tag">DAY 3 · ABILITY 03</div><div class="card-title">極寒與生命</div><div class="card-desc">冰下海洋 + 嗜極生命 + 過濾淨水。</div></div>
+    <div class="card"><div class="card-icon">⛽</div><div class="card-tag">DAY 4 · ABILITY 04</div><div class="card-title">燃料與化學</div><div class="card-desc">甲烷海洋 + 化學能轉換 + 外星農業。</div></div>
+    <div class="card"><div class="card-icon">🛰️</div><div class="card-tag">DAY 5 · ABILITY 05</div><div class="card-title">導航與返航</div><div class="card-desc">軌道力學 + 大氣再入 + 通訊延遲。</div></div>
+  </div>
+</section>
+
+<section class="days">
+  <h2>5 <span class="accent">FORBIDDEN</span> WORLDS</h2>
+  <div class="day-cover" data-tag="DAY 01 · LAUNCH">
+    <h3>獵人基地：逃離地球</h3>
+    <p>火箭推進 + 夯土發射台 + 引力實驗 + 火箭大賽。</p>
+  </div>
+  <div class="day-cover d2" data-tag="DAY 02 · IO 伊歐">
+    <h3>地獄之月：火山與磁場</h3>
+    <p>太陽系最活躍火山世界。木星磁場塑形物質、熔岩湖、SO₂ 大氣。</p>
+  </div>
+  <div class="day-cover d3" data-tag="DAY 03 · EUROPA 歐羅巴">
+    <h3>冰封海洋：尋找生命</h3>
+    <p>冰殼下藏著比地球海洋多 2 倍水量的暗海。</p>
+  </div>
+  <div class="day-cover d4" data-tag="DAY 04 · TITAN 泰坦">
+    <h3>甲烷世界：另一種化學</h3>
+    <p>地球之外唯一有液體湖泊的星球。</p>
+  </div>
+  <div class="day-cover d5" data-tag="DAY 05 · RETURN">
+    <h3>返航地球：帶著發現回家</h3>
+    <p>UFO 解構、外星生命設想、太空引擎、最終獵人日誌發表會。</p>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="kicker">── INITIATE BOOKING ──</div>
+  <h2>五天，<span class="accent">五顆禁區星球</span>。<br>讓孩子先去人類還沒去過的地方。</h2>
+  <a class="btn" href="#">// BOOK MISSION →</a>
+  <div class="schedule">2026 夏令營梯次：6 月底起 / 7 月 / 8 月每月開班，每梯 5 天</div>
+</section>
+</body>
+</html>

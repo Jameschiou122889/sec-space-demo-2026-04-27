@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SEC 太空課視覺方向 demo</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Noto Sans TC", sans-serif; background: #0a0a18; color: #e8edf5;
+    line-height: 1.6;
+    background-image:
+      linear-gradient(rgba(0,212,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,255,0.04) 1px, transparent 1px);
+    background-size: 32px 32px;
+    min-height: 100vh; padding: 40px 24px;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; }
+  h1 { font-family: "Space Mono", monospace; font-size: 1.4rem; color: #00d4ff; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 8px; }
+  .meta { font-family: "Space Mono", monospace; font-size: 11px; color: #ff6b35; letter-spacing: 0.22em; margin-bottom: 32px; text-transform: uppercase; }
+  .intro { color: #9aa8c0; margin-bottom: 36px; max-width: 56ch; font-size: 0.95rem; }
+  .opts { display: grid; gap: 14px; margin-bottom: 40px; }
+  .opt {
+    display: block; padding: 22px 24px; background: #16263d; border: 1px solid rgba(0,212,255,0.25); color: #e8edf5; text-decoration: none; transition: all 0.18s;
+  }
+  .opt:hover { border-color: #00d4ff; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,212,255,0.15); }
+  .opt-title { font-family: "Space Mono", monospace; font-size: 14px; color: #00d4ff; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 6px; }
+  .opt-name { font-size: 1.2rem; font-weight: 700; color: #e8edf5; margin-bottom: 4px; }
+  .opt-desc { font-size: 0.9rem; color: #9aa8c0; }
+
+  .opt-bj { border-color: rgba(255,45,117,0.4); }
+  .opt-bj .opt-title { color: #ff2d75; }
+  .opt-bj:hover { border-color: #ff2d75; box-shadow: 0 8px 24px rgba(255,45,117,0.18); }
+
+  .footer { color: #9aa8c0; font-size: 0.88rem; padding-top: 24px; border-top: 1px solid rgba(232,237,245,0.1); }
+  .footer code { background: #16263d; padding: 2px 6px; font-family: "Space Mono", monospace; font-size: 0.85rem; color: #00d4ff; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>SEC // SPACE HUNTER 視覺方向 demo</h1>
+  <div class="meta">2026-04-27 · BASED ON INSECT B + J · ITERATION 1</div>
+  <p class="intro">把你選的 B（Detective Spec Sheet）+ J（Cyberpunk Neon）結構移植到太空課（5 顆禁區星球）。3 個 variant：純 B、純 J、BJ hybrid。每個 demo 含 hero + marquee + 5 ABILITY cards + 5 day covers + CTA。看完後告訴我選哪個（或哪兩個 mix），我就動 UX block。</p>
+
+  <div class="opts">
+    <a class="opt" href="./b.html">
+      <div class="opt-title">Option B</div>
+      <div class="opt-name">Detective Spec Sheet · 偵測檔案感</div>
+      <div class="opt-desc">深空藍 #0e1b2c + 螢光青 #00d4ff + 警示橘 #ff6b35。Bebas Neue 重體 / Space Mono 終端機字。對應「禁區偵測檔案」框架。</div>
+    </a>
+    <a class="opt" href="./j.html">
+      <div class="opt-title">Option J</div>
+      <div class="opt-name">Cyberpunk Neon · 賽博龐克霓虹</div>
+      <div class="opt-desc">深紫黑 #0a0118 + 霓虹粉紫 #ff2d75 + 電氣青 #00f0ff + 鈷紫 #b347ff + 鎢黃 #fdfd54。Orbitron 任務控制台字 + glitch 效果。B 推到極致 sci-fi。</div>
+    </a>
+    <a class="opt opt-bj" href="./bj.html">
+      <div class="opt-title">Option BJ ★ HYBRID</div>
+      <div class="opt-name">Detective × Neon Hybrid · BJ 融合</div>
+      <div class="opt-desc">B 的偵測檔案結構（hero 左文字＋右 case file）+ J 的霓虹色（深紫黑 + 螢光青 + 霓虹粉紫 + glitch h1）+ B 的橘 CTA。grid 背景兼具 B 的座標系與 J 的氣氛漸層。</div>
+    </a>
+  </div>
+
+  <div class="footer">
+    選好回我「<code>B</code>」「<code>J</code>」「<code>BJ</code>」即可。<br>
+    也可以說「BJ 但 cards 不要 magenta border」「B 但 hero h1 加 glitch」這類局部混搭。<br>
+    決定後，我把這個方向重寫進 <code>content/v3-photos/space.json</code> 的 cssBlock，re-assemble + push 到 WP block <code>76072</code>。
+  </div>
+</div>
+</body>
+</html>
