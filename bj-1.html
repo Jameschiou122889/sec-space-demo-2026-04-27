@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Space · BJ-1 Mission Control</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Orbitron:wght@500;700&family=Space+Mono:wght@400;700&family=Rajdhani:wght@400;500;700&family=Noto+Sans+TC:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050511; --bg-2: #0e1730; --bg-3: #1a1f3d;
+    --cyan: #00f0ff; --magenta: #ff2d75; --violet: #b347ff; --orange: #ff6b35; --yellow: #fdfd54;
+    --text: #e6dffa; --text-sub: #9c8ec5;
+    --grid: rgba(0,240,255,0.06);
+    --font-h: "Bebas Neue", "Noto Sans TC", sans-serif;
+    --font-d: "Space Mono", monospace;
+    --font-b: "Rajdhani", "Noto Sans TC", sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-b); color: var(--text); background: var(--bg); line-height: 1.6;
+    background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  /* SCANLINE OVERLAY (pulsing) */
+  body::before { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 50;
+    background: repeating-linear-gradient(0deg, rgba(0,240,255,0.04) 0 1px, transparent 1px 4px);
+    animation: scan 6s linear infinite; }
+  @keyframes scan { from { background-position-y: 0; } to { background-position-y: 4px; } }
+
+  .nav { position: sticky; top: 0; z-index: 100; background: var(--bg-2); color: var(--cyan); padding: 10px 16px; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-d); font-size: 11px; letter-spacing: 0.18em; border-bottom: 1px solid var(--magenta); }
+  .nav a { color: var(--magenta); text-decoration: none; }
+
+  .glitch { position: relative; display: inline-block; text-shadow: 2px 0 var(--magenta), -2px 0 var(--cyan); }
+
+  /* HERO — wrapped in CRT monitor frame */
+  .hero-wrap { padding: 32px 24px; max-width: 1240px; margin: 0 auto; }
+  .crt {
+    position: relative;
+    background: linear-gradient(135deg, var(--bg-2) 0%, var(--bg-3) 100%);
+    border: 2px solid var(--cyan);
+    padding: 36px 28px 32px;
+  }
+  .crt::before, .crt::after { content: ""; position: absolute; width: 24px; height: 24px; }
+  .crt::before { top: -2px; left: -2px; border-top: 4px solid var(--magenta); border-left: 4px solid var(--magenta); }
+  .crt::after { bottom: -2px; right: -2px; border-bottom: 4px solid var(--magenta); border-right: 4px solid var(--magenta); }
+  /* corner LEDs */
+  .crt-led { position: absolute; width: 8px; height: 8px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 8px var(--cyan); animation: blink 1.4s ease-in-out infinite; }
+  .crt-led.tr { top: 8px; right: 8px; background: var(--magenta); box-shadow: 0 0 8px var(--magenta); animation-delay: 0.7s; }
+  .crt-led.bl { bottom: 8px; left: 8px; background: var(--violet); box-shadow: 0 0 8px var(--violet); animation-delay: 0.35s; }
+  @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+  .crt-bar { display: flex; justify-content: space-between; padding: 6px 12px; background: var(--bg); border: 1px solid var(--cyan); margin-bottom: 24px; font-family: var(--font-d); font-size: 10px; color: var(--cyan); letter-spacing: 0.22em; text-transform: uppercase; }
+  .crt-bar span:nth-child(2) { color: var(--magenta); }
+  .crt-bar span:nth-child(3) { color: var(--text-sub); }
+
+  .hero-grid { display: grid; grid-template-columns: 7fr 5fr; gap: 36px; }
+  @media (max-width: 768px) { .hero-grid { grid-template-columns: 1fr; gap: 24px; } }
+  .hero h1 { font-family: var(--font-h); font-size: 5.4rem; line-height: 0.92; color: var(--text); letter-spacing: 0.01em; }
+  .hero h1 em { font-style: normal; color: var(--cyan); }
+  .hero .lead { color: var(--text-sub); font-size: 1.1rem; margin-top: 14px; max-width: 42ch; }
+  .hero .lead em { color: var(--violet); font-style: normal; font-weight: 700; }
+  .hero .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 24px; padding: 14px 0; border-top: 1px solid var(--magenta); border-bottom: 1px solid var(--cyan); }
+  .hero .stat .num { font-family: "Orbitron", sans-serif; font-size: 1.8rem; color: var(--cyan); font-weight: 700; }
+  .hero .stat .label { font-family: var(--font-d); font-size: 10px; color: var(--text-sub); letter-spacing: 0.15em; text-transform: uppercase; margin-top: 2px; }
+  .hero .cta { display: inline-block; margin-top: 22px; background: var(--orange); color: var(--bg); padding: 14px 32px; font-family: var(--font-d); font-size: 12px; font-weight: 700; letter-spacing: 0.2em; text-decoration: none; text-transform: uppercase; box-shadow: 0 0 24px rgba(255,107,53,0.4); }
+  .case-file { background: var(--bg); padding: 20px; border: 1px solid var(--cyan); position: relative; }
+  .case-file h3 { font-family: var(--font-d); font-size: 11px; color: var(--cyan); letter-spacing: 0.22em; margin-bottom: 12px; text-transform: uppercase; }
+  .case-file h3::before { content: "■ "; color: var(--magenta); animation: blink 1.6s ease-in-out infinite; }
+  .case-file ul { list-style: none; padding: 0; }
+  .case-file li { font-family: var(--font-d); font-size: 0.85rem; color: var(--text-sub); padding: 6px 0; border-bottom: 1px dashed rgba(0,240,255,0.18); }
+  .case-file li::before { content: "▸ "; color: var(--magenta); }
+
+  /* MARQUEE */
+  .marquee { background: var(--bg-2); padding: 12px 0; overflow: hidden; border-top: 1px solid var(--cyan); border-bottom: 1px solid var(--magenta); }
+  .marquee-track { display: flex; gap: 36px; animation: mq 50s linear infinite; width: max-content; }
+  .marquee span { font-family: var(--font-d); font-size: 11px; color: var(--text-sub); letter-spacing: 0.22em; text-transform: uppercase; white-space: nowrap; padding-left: 36px; border-left: 1px solid var(--violet); }
+  @keyframes mq { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* FEATURED */
+  .featured { padding: 64px 24px; max-width: 1200px; margin: 0 auto; }
+  .featured h2 { font-family: var(--font-h); font-size: 2.8rem; text-align: center; letter-spacing: 0.04em; margin-bottom: 8px; }
+  .featured h2 em { font-style: normal; color: var(--magenta); }
+  .featured .sub { text-align: center; color: var(--text-sub); margin-bottom: 36px; font-family: var(--font-d); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; }
+  .cards-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 24px; }
+  @media (max-width: 1024px) { .cards-row { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 600px) { .cards-row { grid-template-columns: repeat(2, 1fr); } }
+  .card { background: var(--bg-2); border: 1px solid var(--cyan); padding: 14px 12px; transition: all 0.2s; position: relative; }
+  .card::before { content: ""; position: absolute; top: -1px; left: -1px; width: 14px; height: 14px; border-top: 2px solid var(--magenta); border-left: 2px solid var(--magenta); }
+  .card:hover { border-color: var(--magenta); transform: translateY(-3px); box-shadow: 0 0 20px rgba(255,45,117,0.3); }
+  .card-tag { font-family: var(--font-d); font-size: 9px; color: var(--cyan); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 8px; }
+  .card-title { font-family: var(--font-h); font-size: 1.4rem; color: var(--text); letter-spacing: 0.02em; margin-bottom: 6px; }
+  .card-desc { font-size: 0.86rem; color: var(--text-sub); line-height: 1.55; }
+  .card-icon { width: 100%; aspect-ratio: 1; background: linear-gradient(135deg, var(--bg-3) 0%, var(--bg-2) 100%); margin-bottom: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; color: var(--cyan); border: 1px solid var(--violet); }
+
+  /* DAYS */
+  .days { padding: 64px 24px; max-width: 1200px; margin: 0 auto; }
+  .days h2 { font-family: var(--font-h); font-size: 2.8rem; text-align: center; letter-spacing: 0.04em; margin-bottom: 36px; }
+  .days h2 em { font-style: normal; color: var(--magenta); }
+  .day-cover { padding: 44px 28px 32px; margin-bottom: 16px; position: relative; background: linear-gradient(135deg, var(--bg-2) 0%, var(--bg-3) 100%); border-left: 4px solid var(--cyan); border-right: 1px solid var(--cyan); }
+  .day-cover.d2 { background: linear-gradient(135deg, #2c0822 0%, #4a1234 100%); border-left-color: var(--magenta); border-right-color: var(--magenta); }
+  .day-cover.d3 { background: linear-gradient(135deg, #0a1a30 0%, #0f2848 100%); border-left-color: var(--cyan); border-right-color: var(--cyan); }
+  .day-cover.d4 { background: linear-gradient(135deg, #2a200a 0%, #3d2e0c 100%); border-left-color: var(--yellow); border-right-color: var(--yellow); }
+  .day-cover.d5 { background: linear-gradient(135deg, #1a0a30 0%, #2a1248 100%); border-left-color: var(--violet); border-right-color: var(--violet); }
+  .day-cover::before { content: attr(data-tag); position: absolute; top: 18px; left: 28px; font-family: var(--font-d); font-size: 10px; color: var(--cyan); letter-spacing: 0.28em; text-transform: uppercase; }
+  .day-cover.d2::before { color: var(--magenta); }
+  .day-cover.d4::before { color: var(--yellow); }
+  .day-cover.d5::before { color: var(--violet); }
+  .day-cover h3 { font-family: var(--font-h); font-size: 2.2rem; letter-spacing: 0.02em; margin-top: 18px; }
+  .day-cover p { color: var(--text-sub); margin-top: 8px; max-width: 600px; }
+
+  /* CTA */
+  .cta-section { padding: 80px 24px; text-align: center; background: var(--bg-2); border-top: 1px solid var(--magenta); position: relative; }
+  .cta-section::before { content: ""; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,240,255,0.05) 0%, transparent 50%, rgba(255,45,117,0.05) 100%); pointer-events: none; }
+  .cta-section .kicker { font-family: var(--font-d); font-size: 11px; color: var(--cyan); letter-spacing: 0.32em; text-transform: uppercase; margin-bottom: 18px; position: relative; }
+  .cta-section h2 { font-family: var(--font-h); font-size: 3.2rem; letter-spacing: 0.02em; line-height: 1.05; position: relative; }
+  .cta-section h2 em { font-style: normal; color: var(--magenta); }
+  .cta-section .btn { display: inline-block; margin-top: 28px; background: var(--orange); color: var(--bg); padding: 18px 44px; font-family: var(--font-d); font-size: 13px; font-weight: 700; letter-spacing: 0.22em; text-decoration: none; text-transform: uppercase; box-shadow: 0 0 28px rgba(255,107,53,0.45); position: relative; }
+  .cta-section .schedule { font-family: var(--font-d); font-size: 11px; color: var(--text-sub); margin-top: 22px; letter-spacing: 0.15em; position: relative; }
+</style>
+</head>
+<body>
+<nav class="nav">
+  <span>SEC // SPACE HUNTER · BJ-1 · MISSION CONTROL</span>
+  <a href="../">← BACK</a>
+</nav>
+
+<section class="hero-wrap">
+  <div class="crt">
+    <div class="crt-led"></div><div class="crt-led tr"></div><div class="crt-led bl"></div>
+    <div class="crt-bar">
+      <span>● MISSION ID 2026.07.SH</span>
+      <span>○ STATUS: CLASSIFIED</span>
+      <span>UTC 09:30 · TPE</span>
+    </div>
+    <div class="hero-grid">
+      <div>
+        <div style="font-family:var(--font-d);font-size:11px;color:var(--cyan);letter-spacing:0.3em;margin-bottom:18px">── 2026 夏令營 · 6-12 歲 · 5 天 20 堂 ──</div>
+        <h1><span class="glitch">Five Forbidden</span><br>Worlds<br><em>Five Days, Five Hunts</em></h1>
+        <p class="lead">人類還沒去過的地方，<em>我們先去</em>。<br>5 顆禁區星球 · 5 天 20 堂 · 10 件帶回家的獵人作品。</p>
+        <div class="stats">
+          <div class="stat"><div class="num">5</div><div class="label">禁區星球</div></div>
+          <div class="stat"><div class="num">10</div><div class="label">件獵人作品</div></div>
+          <div class="stat"><div class="num">1:7</div><div class="label">照顧比</div></div>
+        </div>
+        <a class="cta" href="#">立即報名 →</a>
+      </div>
+      <div class="case-file">
+        <h3>Case File · 教學案例 V1</h3>
+        <ul>
+          <li>目標：伊歐 Io（木星衛星，太陽系最活躍火山）</li>
+          <li>機制：木星潮汐力 → 內部摩擦熱 → 持續火山噴發</li>
+          <li>演示：磁流體 + 強磁鐵 + 紅外線觀測</li>
+          <li>10 件帶回家：化學火箭、磁流體瓶、淨水過濾器、外星種植杯、探測車、UFO 合成照、單極馬達、獵人日誌⋯</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee">
+  <div class="marquee-track">
+    <span>ROCKET PROPULSION</span><span>GRAVITY ESCAPE</span><span>JOVIAN MAGNETOSPHERE</span><span>EUROPA SUBSURFACE OCEAN</span><span>TITAN METHANE LAKES</span><span>EXTREMOPHILES</span><span>ATMOSPHERIC RE-ENTRY</span><span>ORBITAL MECHANICS</span>
+    <span>ROCKET PROPULSION</span><span>GRAVITY ESCAPE</span><span>JOVIAN MAGNETOSPHERE</span><span>EUROPA SUBSURFACE OCEAN</span><span>TITAN METHANE LAKES</span><span>EXTREMOPHILES</span><span>ATMOSPHERIC RE-ENTRY</span><span>ORBITAL MECHANICS</span>
+  </div>
+</div>
+
+<section class="featured">
+  <h2>5 種<em>能力解鎖</em> + 10 件帶回家</h2>
+  <p class="sub">— ABILITIES · TAKEAWAYS —</p>
+  <div class="cards-row">
+    <div class="card"><div class="card-icon">🚀</div><div class="card-tag">DAY 1 · ABILITY 01</div><div class="card-title">推進與引力</div><div class="card-desc">牛頓第三定律 + 火箭推進 + 引力場逃逸。</div></div>
+    <div class="card"><div class="card-icon">🌋</div><div class="card-tag">DAY 2 · ABILITY 02</div><div class="card-title">磁場與輻射</div><div class="card-desc">木星磁場 + 太陽輻射 + 磁流體導向。</div></div>
+    <div class="card"><div class="card-icon">❄️</div><div class="card-tag">DAY 3 · ABILITY 03</div><div class="card-title">極寒與生命</div><div class="card-desc">冰下海洋 + 嗜極生命 + 過濾淨水。</div></div>
+    <div class="card"><div class="card-icon">⛽</div><div class="card-tag">DAY 4 · ABILITY 04</div><div class="card-title">燃料與化學</div><div class="card-desc">甲烷海洋 + 化學能轉換 + 外星農業。</div></div>
+    <div class="card"><div class="card-icon">🛰️</div><div class="card-tag">DAY 5 · ABILITY 05</div><div class="card-title">導航與返航</div><div class="card-desc">軌道力學 + 大氣再入 + 通訊延遲。</div></div>
+  </div>
+</section>
+
+<section class="days">
+  <h2>5 顆<em>禁區星球</em></h2>
+  <div class="day-cover" data-tag="DAY 01 · LAUNCH"><h3>獵人基地：逃離地球</h3><p>火箭推進 + 夯土發射台 + 引力實驗 + 火箭大賽。</p></div>
+  <div class="day-cover d2" data-tag="DAY 02 · IO 伊歐"><h3>地獄之月：火山與磁場</h3><p>太陽系最活躍火山世界。木星磁場塑形物質、熔岩湖、SO₂ 大氣。</p></div>
+  <div class="day-cover d3" data-tag="DAY 03 · EUROPA 歐羅巴"><h3>冰封海洋：尋找生命</h3><p>冰殼下藏著比地球海洋多 2 倍水量的暗海。</p></div>
+  <div class="day-cover d4" data-tag="DAY 04 · TITAN 泰坦"><h3>甲烷世界：另一種化學</h3><p>地球之外唯一有液體湖泊的星球。</p></div>
+  <div class="day-cover d5" data-tag="DAY 05 · RETURN"><h3>返航地球：帶著發現回家</h3><p>UFO 解構、外星生命設想、太空引擎、最終獵人日誌發表會。</p></div>
+</section>
+
+<section class="cta-section">
+  <div class="kicker">── BOOK YOUR SEAT ──</div>
+  <h2>五天，<em>五顆禁區星球</em>。<br>讓孩子先去人類還沒去過的地方。</h2>
+  <a class="btn" href="#">立即報名 →</a>
+  <div class="schedule">2026 夏令營梯次：6 月底起 / 7 月 / 8 月每月開班，每梯 5 天</div>
+</section>
+</body>
+</html>
